@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import Header from './components/Header';
+import styled from 'styled-components';
+import getData from './utils/getDataJSON';
+import Board from './components/Board';
+import dataContext from './components/Context';
+
+
+const AppContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
 
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData(setData);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <dataContext.Provider value={data}>
+      <AppContainer className="App">
+        <Header/>
+        <Board />
+      </AppContainer>
+    </dataContext.Provider>
   );
 }
 
