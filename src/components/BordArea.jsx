@@ -2,17 +2,23 @@ import React from 'react'
 import styled from 'styled-components';
 
 
-const BoardAreaContainer = styled.div`
-  height: 100%;
-  flex-grow: 1;
-  flex-shrink: 1;
+const BoardAreaContainer = styled.div(props => ({
+  height: `100%`,
+  flexGrow: `1`,
+  flexShrink: `1`,
 
-  background-color: ${props => props.theme.colors.lightGrey}; 
-`;
+  transition: 'all 0.3s',
+  paddingLeft: props.StateShowSideBar === 'show' ? '300px' : '0px',
 
-export default function BordArea() {
+  
+  backgroundColor: `${props.theme.colors.lightGrey}`,
+
+}));
+
+
+export default function BordArea(props) {
   return (
-    <BoardAreaContainer>
+    <BoardAreaContainer StateShowSideBar={props.StateShowSideBar}>
       BordArea
     </BoardAreaContainer>
   )

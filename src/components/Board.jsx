@@ -11,8 +11,8 @@ const BoardContainer = styled.div( props =>({
   
   position: 'relative',
   transition: 'all 0.3s',
-  width: '100vw+300px',
-  left: props.visibleSideBar === 'show'? '0px' : '-300px',
+  width: '100vw',
+  // left: props.visibleSideBar === 'show'? '0px' : '-300px',
 
 }));
 
@@ -24,7 +24,7 @@ const Board = () => {
   return (
     <BoardContainer visibleSideBar={StateShowSideBar} >
       <SideBar StateShowSideBar={{ StateShowSideBar, setStateShowSideBar }} />
-      <BordArea />
+      <BordArea StateShowSideBar={StateShowSideBar} />
     </BoardContainer>
   )
 }
