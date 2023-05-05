@@ -16,18 +16,21 @@ const Item = styled.div`
       fill: ${props => props.theme.colors.white};
     }
   }
-  &:hover{
-    background-color: rgba(99, 95, 199 , 0.1);
-    color: ${props => props.theme.colors.mainPurple};
-    path{
-      fill: ${props => props.theme.colors.mainPurple};
+  @media (any-hover: hover) {
+
+    &:hover{
+      background-color: rgba(99, 95, 199 , 0.1);
+      color: ${props => props.theme.colors.mainPurple};
+      path{
+        fill: ${props => props.theme.colors.mainPurple};
+      }
     }
-  }
-  &.active:hover{
-    background-color: ${props => props.theme.colors.mainPurpleHover};
-    color: ${props => props.theme.colors.white};
-    path{
-      fill: ${props => props.theme.colors.white};
+    &.active:hover{
+      background-color: ${props => props.theme.colors.mainPurpleHover};
+      color: ${props => props.theme.colors.white};
+      path{
+        fill: ${props => props.theme.colors.white};
+      }
     }
   }
 

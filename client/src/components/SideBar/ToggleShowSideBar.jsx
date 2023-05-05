@@ -9,11 +9,13 @@ const Item = styled.div`
   background: transperty;
   transition: all 0.15s;
 
-  &:hover{
-    background-color: rgba(99, 95, 199 , 0.1);
-    color: ${props => props.theme.colors.mainPurple};
-    path{
-      fill: ${props => props.theme.colors.mainPurple};
+  @media (any-hover: hover) {
+    &:hover{
+      background-color: rgba(99, 95, 199 , 0.1);
+      color: ${props => props.theme.colors.mainPurple};
+      path{
+        fill: ${props => props.theme.colors.mainPurple};
+      }
     }
   }
 

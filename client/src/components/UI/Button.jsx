@@ -10,8 +10,10 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 24px;
 
-  &:hover{
-    background: ${props => props.colorBG || props.theme.colors.mainPurpleHover};
+  @media (any-hover: hover) {
+    &:hover{
+      background: ${props => props.colorBG || props.theme.colors.mainPurpleHover};
+    }
   }
 `
 

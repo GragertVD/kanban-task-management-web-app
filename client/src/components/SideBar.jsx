@@ -20,8 +20,6 @@ const SideBarContainer = styled.div(props=>({
     backgroundColor: `${props.theme.colors.white}`,
   
     position: `absolute`,
-  
-  
 
 }));
 

@@ -13,8 +13,10 @@ const ToggleStyl = styled.div`
 
   cursor: pointer;
   transition: all 0.1s;
-  &:hover{
-    background: ${props => props.theme.colors.mainPurpleHover};
+  @media (any-hover: hover) {
+    &:hover{
+      background: ${props => props.theme.colors.mainPurpleHover};
+    }
   }
 
   &::before{

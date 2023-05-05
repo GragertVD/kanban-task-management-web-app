@@ -8,8 +8,10 @@ const Item = styled.div`
   background: transperty;
   transition: all 0.15s;
 
-  &:hover{
-    background-color: rgba(99, 95, 199 , 0.1);
+  @media (any-hover: hover) {
+    &:hover{
+      background-color: rgba(99, 95, 199 , 0.1);
+    }
   }
 
   width: 100%;
