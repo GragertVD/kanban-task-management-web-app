@@ -5,12 +5,10 @@ import styled from 'styled-components';
 
 const BoardContainer = styled.div(props => ({
   display: 'flex',
-  height: '100%',
+  minHeight: '100%',
 
   position: 'relative',
   transition: 'all 0.3s',
-  width: '100vw',
-
 }));
 
 export const Board = () => {

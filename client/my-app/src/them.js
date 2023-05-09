@@ -45,7 +45,7 @@ export const bazeTheme = {
       fontWeight: "700",
       fontSize: "12px",
       lineHeight: "15px",
-      leterSpacing: "2.4px",
+      letterSpacing: "2.4px",
       // color: '${props => props.theme.main.colors.mediumGrey}',
     },
   },

@@ -3,30 +3,32 @@ import Header from './components/Header';
 import styled from 'styled-components';
 import getData from './utils/getDataJSON';
 import { Board } from './components/Board';
-import dataContext from './components/Context';
+import { SelectBoardProvider } from './Context/Context';
 
 
 const AppContainer = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 
 function App() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
   useEffect(() => {
-    getData(setData);
+    getData();
   }, []);
 
+
   return (
-    <dataContext.Provider value={data}>
-      <AppContainer className="App">
-        <Header />
-        <Board />
-      </AppContainer>
-    </dataContext.Provider>
+      <SelectBoardProvider>
+        <AppContainer className="App">
+          <Header />
+          <Board />
+        </AppContainer>
+      </SelectBoardProvider>
   );
 }
 

@@ -23,10 +23,10 @@ export interface ITask {
   title: string;
   description?: string;
   status: string;
-  subtasks?: ISubtasks[];
+  subtasks?: ISubtask[];
 }
 
-export interface ISubtasks {
+export interface ISubtask {
   title: string;
   isCompleted: boolean;
 }

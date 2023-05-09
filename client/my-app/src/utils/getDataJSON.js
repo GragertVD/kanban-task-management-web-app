@@ -11,7 +11,8 @@ const getData = (setData) => {
       return response.json();
     })
     .then(function (myJson) {
-      setData(myJson);
+      // setData(myJson);
+      localStorage.setItem('dataBoards', JSON.stringify(myJson));
     });
 }
 

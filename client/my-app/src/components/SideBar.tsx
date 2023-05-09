@@ -10,7 +10,6 @@ const SideBarContainer = styled.div<{ stateShowSideBar: 'show' | 'hiden' }>(prop
   transition: 'all 0.3s',
   left: props.stateShowSideBar === 'show' ? '0px' : '-300px',
 
-  height: '100%',
   width: '300px',
   display: 'flex',
   flexDirection: 'column',
@@ -20,8 +19,10 @@ const SideBarContainer = styled.div<{ stateShowSideBar: 'show' | 'hiden' }>(prop
   borderRight: `1px solid ${props.theme.colors.linesLight}`,
   backgroundColor: `${props.theme.colors.white}`,
 
-  position: `absolute`,
-
+  position: `fixed`,
+  top: '96px',
+  bottom: '0',
+  // overflowY: 'auto',
 }));
 
 const SideBar: React.FC<IPropsToggleShowSideBar> = (props) => {
