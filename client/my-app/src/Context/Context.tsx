@@ -11,14 +11,13 @@ type IProps = {
   children?: ReactNode;
 }
 
-
 export const SelectBoardContext = React.createContext<IContext>({});
 
 export const SelectBoardProvider: React.FC<IProps> = ({ children }) => {
 
   const [indexActiveBoard, setIndexActiveBoard] = useState(0);
 
-  return(
+  return (
     <SelectBoardContext.Provider value={{ indexActiveBoard, setIndexActiveBoard }}>
       {children}
     </SelectBoardContext.Provider>

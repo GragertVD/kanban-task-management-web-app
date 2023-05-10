@@ -23,12 +23,12 @@ function App() {
 
 
   return (
-      <SelectBoardProvider>
-        <AppContainer className="App">
-          <Header />
-          <Board />
-        </AppContainer>
-      </SelectBoardProvider>
+    <SelectBoardProvider>
+      <AppContainer className="App">
+        <Header />
+        <Board />
+      </AppContainer>
+    </SelectBoardProvider>
   );
 }
 

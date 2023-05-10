@@ -38,13 +38,13 @@ export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
 
   if (data && data.boards !== undefined) {
     // console.log(data.boards[0].columns);
-    const activeBoard: IBoard = data.boards[indexActiveBoard ? indexActiveBoard: 0];
+    const activeBoard: IBoard = data.boards[indexActiveBoard ? indexActiveBoard : 0];
     return (
       <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={activeBoard.columns.length}>
         {
           activeBoard.columns.length ?
             activeBoard.columns.map((dataColumn, index) => <BoardColumn key={index} name={dataColumn.name} tasks={dataColumn.tasks} />)
-            :
+          :
             <BoardEmpty />
         }
 

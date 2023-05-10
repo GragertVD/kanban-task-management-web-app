@@ -48,6 +48,22 @@ export const bazeTheme = {
       letterSpacing: "2.4px",
       // color: '${props => props.theme.main.colors.mediumGrey}',
     },
+    body_M: {
+      fontFamily: "'Plus Jakarta Sans', sans-serif;",
+      fontStyle: "normal",
+      fontWeight: "700",
+      fontSize: "12px",
+      lineHeight: "15px",
+      // color: '${props => props.theme.main.colors.mediumGrey}',
+    },
+    body_L: {
+      fontFamily: "'Plus Jakarta Sans', sans-serif;",
+      fontStyle: "normal",
+      fontWeight: "500",
+      fontSize: "13px",
+      lineHeight: "13px",
+      // color: '${props => props.theme.main.colors.mediumGrey}',
+    },
   },
 
 };

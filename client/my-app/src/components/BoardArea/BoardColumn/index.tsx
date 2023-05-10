@@ -1,4 +1,4 @@
-import { IBoard, IColumn } from '../../../interface';
+import { IColumn } from '../../../interface';
 import TaskCard from '../TaskCard';
 import { BoardColumnContainer, ColumnTasksContainer } from './style';
 
@@ -12,8 +12,8 @@ const BoardColumn: React.FC<IColumn> = (props) => {
         {
           props.tasks.length ?
             props.tasks.map((dataTask, index) => <TaskCard key={index} {...dataTask} />)
-            :
-            <div>What?</div>
+          :
+            <div></div>
         }
         {/* <TaskCard /> */}
       </ColumnTasksContainer>

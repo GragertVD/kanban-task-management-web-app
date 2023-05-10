@@ -20,7 +20,7 @@ function ListBoard() {
   if (data && data.boards)
     return (
       <div
-        // style={{ overflowY: 'auto' }}
+      // style={{ overflowY: 'auto' }}
       >
         {/* <h3>ALL BOARD ({props.data.board.length})</h3> */}
         {data.boards
