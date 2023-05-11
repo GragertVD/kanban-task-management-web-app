@@ -20,10 +20,11 @@ export const Background = styled.div<{ openCard: boolean }>`
 `;
 
 export const CardContainer = styled.div<{ openCard: boolean }>`
-  background-color: ${props => props.theme.colors.white};
+  background-color: transparent;
+  /* background-color: ${props => props.theme.colors.white}; */
 
-  max-width: 480px;
-  padding: 32px;
+  /* max-width: 480px;
+  padding: 32px; */
 
   transition: all 0.35s;
   transform: scale(${props => props.openCard ? 1 : 0});

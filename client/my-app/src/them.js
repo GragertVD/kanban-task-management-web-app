@@ -61,7 +61,7 @@ export const bazeTheme = {
       fontStyle: "normal",
       fontWeight: "500",
       fontSize: "13px",
-      lineHeight: "13px",
+      lineHeight: "23px",
       // color: '${props => props.theme.main.colors.mediumGrey}',
     },
   },
