@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import Logo from './UI/Logo'
 import Button from './UI/Button'
 import iconMenu from "../img/icon-vertical-ellipsis.svg";
+import { useContext } from 'react';
+import { SelectBoardContext } from '../Context/Context';
+import { IData } from '../interface';
 
 const StyledHeader = styled.div`
   display: flex;
@@ -26,11 +29,23 @@ const StyledHeader = styled.div`
 `;
 
 const Header = () => {
+
+  const {data, indexActiveBoard } = useContext(SelectBoardContext);
+  // let data: IData | undefined;
+  // const dataBoardsString: string | null = localStorage.getItem('dataBoards');
+  // if (dataBoardsString) {
+  //   data = JSON.parse(dataBoardsString);
+  // }
+
   return (
     <StyledHeader>
       <div>
         <Logo />
-        <h1>Platform Launch</h1>
+        {
+          data && (data.boards !== undefined && indexActiveBoard !== undefined)
+            ? <h1> {data.boards[indexActiveBoard].name}</h1>
+            : <h1> Boards missing </h1>
+        }
       </div>
       <div>
         <Button text="+ Add new task" />

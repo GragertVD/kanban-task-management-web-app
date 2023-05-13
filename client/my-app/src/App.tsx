@@ -15,11 +15,11 @@ const AppContainer = styled.div`
 
 
 function App() {
-  // const [data, setData] = useState([]);
+  // const [data, setData] = usecState([]);
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
 
   return (

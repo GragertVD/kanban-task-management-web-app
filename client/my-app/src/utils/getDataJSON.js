@@ -1,4 +1,6 @@
-const getData = (setData) => {
+import { reduserData_actionType } from "../Context/reduserData";
+
+const getData = (dispatchData) => {
   fetch('data.json'
     , {
       headers: {
@@ -12,7 +14,8 @@ const getData = (setData) => {
     })
     .then(function (myJson) {
       // setData(myJson);
-      localStorage.setItem('dataBoards', JSON.stringify(myJson));
+      // localStorage.setItem('dataBoards', JSON.stringify(myJson));
+      dispatchData({ type: reduserData_actionType.getData, payload: myJson });
     });
 }
 

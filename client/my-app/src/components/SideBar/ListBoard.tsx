@@ -8,14 +8,14 @@ import { SelectBoardContext } from '../../Context/Context';
 function ListBoard() {
   // const data:IData = useContext(dataContext);
 
-  let data: IData | undefined;
-  const dataBoardsString: string | null = localStorage.getItem('dataBoards');
-  if (dataBoardsString) {
-    data = JSON.parse(dataBoardsString);
-  }
+  // let data: IData | undefined;
+  // const dataBoardsString: string | null = localStorage.getItem('dataBoards');
+  // if (dataBoardsString) {
+  //   data = JSON.parse(dataBoardsString);
+  // }
 
   // let indexActiveBoard: string | null = localStorage.getItem('indexActiveBoard');
-  const { indexActiveBoard } = useContext(SelectBoardContext);
+  const {data, indexActiveBoard } = useContext(SelectBoardContext);
 
   if (data && data.boards)
     return (

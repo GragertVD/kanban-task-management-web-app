@@ -1,30 +1,48 @@
-import { ITask } from "../../../interface";
 import { usePopup } from "../../../hooks/usePopup";
 import { TaskCardContainer } from "./style";
 import React from "react";
 import { TaskOpen } from '../TaskOpen/index';
+import { useContext } from 'react';
+import { SelectBoardContext, TaskCardContext } from "../../../Context/Context";
+import { IData } from "../../../interface";
+import { reduserData_actionType } from "../../../Context/reduserData";
+import {useEffect} from 'react';
 
 
-const TaskCard: React.FC<ITask> = (props) => {
+const TaskCard: React.FC = () => {
+  const { dataTask } = useContext(TaskCardContext);
+  const { data, dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
 
-  const popup = usePopup();
+  // useEffect(() => {
+    
+  //   dispatchData({ type: reduserData_actionType.taskChangeLoad, indexActiveBoard, task: dataTask });
+
+  // }, [dataTask.status]);
+  const popupClose = () => {
+    dispatchData({ type: reduserData_actionType.taskChangeLoad, indexActiveBoard, task: dataTask });
+
+    
+  };
+
+  const popup = usePopup(popupClose);
   const PopupWrapper = popup.PopupWrapper;
+
 
   let quantitySubtasksAll: number = 0;
   let quantitySubtasksComlited: number = 0;
 
-  if (props.subtasks !== undefined) {
-    quantitySubtasksAll = props.subtasks.length;
-    const subtasksComlited = props.subtasks.filter(({ isCompleted }) => isCompleted);
+  if (dataTask.subtasks !== undefined) {
+    quantitySubtasksAll = dataTask.subtasks.length;
+    const subtasksComlited = dataTask.subtasks.filter(({ isCompleted }) => isCompleted);
     quantitySubtasksComlited = subtasksComlited.length;
   }
 
   return (
     <>
-      <TaskCardContainer 
+      <TaskCardContainer
         onClick={() => popup.popupOpen()}
       >
-        <h5>{props.title}</h5>
+        <h5>{dataTask.title}</h5>
 
         {   //Строка с учетом выполненых подзадач
           quantitySubtasksAll === 0 ?
@@ -35,7 +53,7 @@ const TaskCard: React.FC<ITask> = (props) => {
 
       </TaskCardContainer>
       <PopupWrapper>
-        <TaskOpen {...props}/>
+        <TaskOpen />
       </PopupWrapper>
     </>
   )

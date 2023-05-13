@@ -26,14 +26,14 @@ const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', coun
 export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
 
   // const data: IData = useContext(dataContext);
-  let data: IData | undefined;
-  const dataBoardsString: string | null = localStorage.getItem('dataBoards');
-  if (dataBoardsString) {
-    data = JSON.parse(dataBoardsString);
-  }
+  // let data: IData | undefined;
+  // const dataBoardsString: string | null = localStorage.getItem('dataBoards');
+  // if (dataBoardsString) {
+  //   data = JSON.parse(dataBoardsString);
+  // }
 
   // let indexActiveBoard: string | null = localStorage.getItem('indexActiveBoard');
-  const { indexActiveBoard } = useContext(SelectBoardContext);
+  const {data, indexActiveBoard } = useContext(SelectBoardContext);
 
 
   if (data && data.boards !== undefined) {
@@ -42,7 +42,8 @@ export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
     return (
       <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={activeBoard.columns.length}>
         {
-          activeBoard.columns.length ?
+          activeBoard.columns.length 
+          ?
             activeBoard.columns.map((dataColumn, index) => <BoardColumn key={index} name={dataColumn.name} tasks={dataColumn.tasks} />)
           :
             <BoardEmpty />

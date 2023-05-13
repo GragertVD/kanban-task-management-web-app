@@ -1,38 +1,29 @@
 import { ITask } from "../../../interface";
-import { Description, SubtasksContainer, TaskOpenContainer, Title } from "./style";
+import { Description, TaskOpenContainer, Title } from "./style";
 import iconMenu from "../../../img/icon-vertical-ellipsis.svg";
 import React from "react";
+import Checkbox from "../../UI/Checkbox";
+import { useContext } from 'react';
+import { TaskCardContext } from "../../../Context/Context";
+import SubtasksList from "../SubtasksList";
+import SelectStatus from "../../UI/SelectStatus";
 
+export const TaskOpen: React.FC = () => {
 
-export const TaskOpen: React.FC<ITask> = (props) => {
-
-  let quantitySubtasksAll: number = 0;
-  let quantitySubtasksComlited: number = 0;
-
-  if (props.subtasks !== undefined) {
-    quantitySubtasksAll = props.subtasks.length;
-    const subtasksComlited = props.subtasks.filter(({ isCompleted }) => isCompleted);
-    quantitySubtasksComlited = subtasksComlited.length;
-  }
+  const {dataTask} = useContext(TaskCardContext);
 
   return (
     <>
       <TaskOpenContainer>
         <Title>
-          <h3>{props.title}</h3>
+          <h3>{dataTask.title}</h3>
           <img src={iconMenu} alt="картинка" />
         </Title>
         <Description>
-          {props.description}
+          {dataTask.description}
         </Description>
-        <SubtasksContainer>
-          {   //Строка с учетом выполненых подзадач
-            quantitySubtasksAll === 0 ?
-              <p>0 substasks</p>
-              :
-              <p>{quantitySubtasksComlited} of {quantitySubtasksAll} substasks</p>
-          }
-        </SubtasksContainer>
+        <SubtasksList />
+        <SelectStatus />
       </TaskOpenContainer>
     </>
   )

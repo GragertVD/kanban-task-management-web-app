@@ -5,7 +5,7 @@ interface Popup {
   children?: ReactNode;
 }
 
-export const usePopup = () => {
+export const usePopup = (popupClose?: Function) => {
 
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -18,6 +18,7 @@ export const usePopup = () => {
 
     const closeCardFromKey = (e: KeyboardEvent) => {
       if (e.code === 'Escape') {
+        popupClose && popupClose();
         setOpenPopup(false);
         document.removeEventListener('keydown', closeCardFromKey);
       }
@@ -29,7 +30,7 @@ export const usePopup = () => {
 
     return (
       <Background openCard={openPopup}
-        onClick={() => setOpenPopup(false)}
+        onClick={() => { popupClose && popupClose(); setOpenPopup(false)}}
       >
         <CardContainer openCard={openPopup}
           onClick={(e) => e.stopPropagation()}

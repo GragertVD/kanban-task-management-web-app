@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TaskOpenContainer = styled.div`
-  max-width: 480px;
+  width: 480px;
   background-color: ${props => props.theme.colors.white};
   border-radius: 5px;
   padding: 32px;
@@ -33,12 +33,6 @@ export const Title = styled.div`
 export const Description = styled.div`
   width: 100%;
   ${props => props.theme.fonts.body_L};
-  color: ${props => props.theme.colors.mediumGrey};
-`;
-
-export const SubtasksContainer = styled.div`
-  width: 100%;
-  ${props => props.theme.fonts.body_M};
   color: ${props => props.theme.colors.mediumGrey};
 `;
 
