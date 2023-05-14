@@ -5,6 +5,7 @@ export enum reduserData_actionType {
   taskChangeStatus = 'taskChangeStatus',
   addColumn = 'addColumn',
   addBoard = 'addBoard',
+  deleteTask = 'deleteTask',
 }
 
 export interface IactionData {
@@ -34,6 +35,36 @@ export const reduserData = (state: IData, action: IactionData) => {
 
       return { ...state };
 
+    case reduserData_actionType.deleteTask:
+      // const newBoard: IBoard = { name: "new Board", columns: [] };
+
+      if (state.boards && action.indexActiveBoard !== undefined && action.task !== undefined){
+        let taskId = -1;
+        const columnId = state.boards[action.indexActiveBoard].columns.findIndex(
+          (column) => {
+            taskId = column.tasks.findIndex((task) => {
+              if (task)
+                return (task.title === (action.task as ITask).title)
+              else
+                return 0;
+            });
+            if (taskId !== -1)
+              return true;
+            else
+              return false;
+          }
+        )
+
+        if (taskId !== -1) {
+
+          state.boards[action.indexActiveBoard].columns[columnId].tasks.splice(taskId, 1);
+
+          return { ...state };
+        }
+      }
+
+      return state;
+
     case reduserData_actionType.taskChangeStatus:
       const columnNewName = (action.task as ITask).status;
       const taskTitle = (action.task as ITask).title;
@@ -59,10 +90,7 @@ export const reduserData = (state: IData, action: IactionData) => {
           }
         );
 
-        console.log(action.task);
-
         if (taskId !== -1 && columnNewId !== columnPrevId) {
-          console.log("deleted task");
 
           newData.boards[action.indexActiveBoard].columns[columnNewId].tasks.push(action.task);
           newData.boards[action.indexActiveBoard].columns[columnPrevId].tasks.splice(taskId, 1);
