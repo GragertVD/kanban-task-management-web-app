@@ -3,6 +3,7 @@ import ItemBoard from './ItemBoard'
 import CreateItemBoard from './CreateItemBoard';
 import { IData } from '../../interface';
 import { SelectBoardContext } from '../../Context/Context';
+import { reduserData_actionType } from '../../Context/reduserData';
 
 
 function ListBoard() {
@@ -15,7 +16,8 @@ function ListBoard() {
   // }
 
   // let indexActiveBoard: string | null = localStorage.getItem('indexActiveBoard');
-  const {data, indexActiveBoard } = useContext(SelectBoardContext);
+  const { data, indexActiveBoard } = useContext(SelectBoardContext);
+
 
   if (data && data.boards)
     return (

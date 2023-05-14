@@ -1,9 +1,10 @@
-import { IColumn, IData, ITask } from "../interface";
+import { IBoard, IColumn, IData, ITask } from "../interface";
 
 export enum reduserData_actionType {
   getData = 'getData',
   taskChangeStatus = 'taskChangeStatus',
   addColumn = 'addColumn',
+  addBoard = 'addBoard',
 }
 
 export interface IactionData {
@@ -20,11 +21,18 @@ export const reduserData = (state: IData, action: IactionData) => {
       return { ...temp };
 
     case reduserData_actionType.addColumn:
-      const newColumn:IColumn = {name: "newColumn", tasks:[]};
+      const newColumn: IColumn = { name: "newColumn", tasks: [] };
       if (state.boards && action.indexActiveBoard !== undefined)
         state.boards[action.indexActiveBoard].columns.push(newColumn);
 
-      return {...state};
+      return { ...state };
+
+    case reduserData_actionType.addBoard:
+      const newBoard: IBoard = { name: "new Board", columns: [] };
+      if (state.boards)
+        state.boards.push(newBoard);
+
+      return { ...state };
 
     case reduserData_actionType.taskChangeStatus:
       const columnNewName = (action.task as ITask).status;
