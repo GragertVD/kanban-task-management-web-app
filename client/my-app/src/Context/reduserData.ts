@@ -1,9 +1,9 @@
-import { isNumberObject, isStringObject } from "util/types";
-import { IData, ITask } from "../interface";
+import { IColumn, IData, ITask } from "../interface";
 
 export enum reduserData_actionType {
   getData = 'getData',
-  taskChangeLoad = 'taskChangeLoad',
+  taskChangeStatus = 'taskChangeStatus',
+  addColumn = 'addColumn',
 }
 
 export interface IactionData {
@@ -19,25 +19,49 @@ export const reduserData = (state: IData, action: IactionData) => {
       let temp = action.payload as IData;
       return { ...temp };
 
-    case reduserData_actionType.taskChangeLoad:
+    case reduserData_actionType.addColumn:
+      const newColumn:IColumn = {name: "newColumn", tasks:[]};
+      if (state.boards && action.indexActiveBoard !== undefined)
+        state.boards[action.indexActiveBoard].columns.push(newColumn);
+
+      return {...state};
+
+    case reduserData_actionType.taskChangeStatus:
       const columnNewName = (action.task as ITask).status;
       const taskTitle = (action.task as ITask).title;
-      const newData = {...state};
-      
+      const newData = { ...state };
+
       if (newData.boards && state.boards && action.indexActiveBoard !== undefined && action.task) {
-        
+
         const columnNewId = state.boards[action.indexActiveBoard].columns.findIndex((element) => element.name === columnNewName);
-        
-        // const columnPrevId = state.boards[action.indexActiveBoard].columns.findIndex((element) => element.tasks === taskTitle);
 
-        newData.boards[action.indexActiveBoard].columns[columnNewId].tasks.push(action.task);
-        console.log(columnNewId);
-        
+        let taskId = -1;
+        const columnPrevId = state.boards[action.indexActiveBoard].columns.findIndex(
+          (column) => {
+            taskId = column.tasks.findIndex((task) => {
+              if (task)
+                return (task.title !== undefined && task.title === taskTitle)
+              else
+                return 0;
+            });
+            if (taskId !== -1)
+              return true;
+            else
+              return false;
+          }
+        );
+
+        console.log(action.task);
+
+        if (taskId !== -1 && columnNewId !== columnPrevId) {
+          console.log("deleted task");
+
+          newData.boards[action.indexActiveBoard].columns[columnNewId].tasks.push(action.task);
+          newData.boards[action.indexActiveBoard].columns[columnPrevId].tasks.splice(taskId, 1);
+
+          return { ...newData };
+        }
       }
-
-      console.log(state);
-      console.log(newData);
-      
 
       return { ...state };
 

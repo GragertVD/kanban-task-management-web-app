@@ -4,6 +4,7 @@ import { IBoard, IData, IPropsToggleShowSideBar } from '../interface';
 import BoardEmpty from './BoardArea/BoardEmpty';
 import BoardColumn from './BoardArea/BoardColumn';
 import { SelectBoardContext } from '../Context/Context';
+import AddColumn from './BoardArea/AddColumn';
 
 
 const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', countColumn: number }>`
@@ -33,24 +34,29 @@ export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
   // }
 
   // let indexActiveBoard: string | null = localStorage.getItem('indexActiveBoard');
-  const {data, indexActiveBoard } = useContext(SelectBoardContext);
+  const { data, indexActiveBoard } = useContext(SelectBoardContext);
 
 
-  if (data && data.boards !== undefined) {
+  if (data && data.boards !== undefined && indexActiveBoard !== undefined) {
     // console.log(data.boards[0].columns);
-    const activeBoard: IBoard = data.boards[indexActiveBoard ? indexActiveBoard : 0];
-    return (
-      <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={activeBoard.columns.length}>
-        {
-          activeBoard.columns.length 
-          ?
-            activeBoard.columns.map((dataColumn, index) => <BoardColumn key={index} name={dataColumn.name} tasks={dataColumn.tasks} />)
-          :
-            <BoardEmpty />
-        }
-
-      </BoardAreaContainer>
-    )
+    const activeBoard: IBoard = data.boards[indexActiveBoard];
+    // console.log(activeBoard.columns[0].tasks);
+    if (activeBoard.columns.length) {
+      return (
+        <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={activeBoard.columns.length + 1}>
+          {
+            activeBoard.columns.map((dataColumn, index) => <BoardColumn key={index} index={index} {...dataColumn} />)
+          }
+          < AddColumn />
+        </BoardAreaContainer>
+      )
+    } else {
+      return (
+        <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={0}>
+          <BoardEmpty />
+        </BoardAreaContainer>
+      )
+    }
   } else {
     return (
       <div>load</div>

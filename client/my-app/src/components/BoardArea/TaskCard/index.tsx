@@ -13,15 +13,8 @@ const TaskCard: React.FC = () => {
   const { dataTask } = useContext(TaskCardContext);
   const { data, dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
 
-  // useEffect(() => {
-    
-  //   dispatchData({ type: reduserData_actionType.taskChangeLoad, indexActiveBoard, task: dataTask });
-
-  // }, [dataTask.status]);
   const popupClose = () => {
-    dispatchData({ type: reduserData_actionType.taskChangeLoad, indexActiveBoard, task: dataTask });
-
-    
+    dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
   };
 
   const popup = usePopup(popupClose);

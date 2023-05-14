@@ -10,18 +10,14 @@ import { reduserDataTask_actionType } from "../../../Context/reduserDataTask";
 
 const SelectStatus: React.FC = () => {
 
-  // let data: IData | undefined;
-  // const dataBoardsString: string | null = localStorage.getItem('dataBoards');
-  // if (dataBoardsString) {
-  //   data = JSON.parse(dataBoardsString);
-  // }
-
   const { dataTask, dispatchDataTask } = useContext(TaskCardContext);
 
   const { data, indexActiveBoard } = useContext(SelectBoardContext);
 
 
   const handleChange = (event: SelectChangeEvent) => {
+    console.log("Change status");
+    
     dispatchDataTask({ type: reduserDataTask_actionType.changeStatus, payload: event.target.value})
   };
 

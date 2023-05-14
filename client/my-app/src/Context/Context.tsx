@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactNode, SetStateAction, useEffect, useReducer, useState } from "react";
 import { IData, ITask } from '../interface';
-import { Iaction, reduserDataTask } from "./reduserDataTask";
+import { Iaction, InitDataTask, reduserDataTask } from "./reduserDataTask";
 import getData from "../utils/getDataJSON";
 import { IactionData, reduserData } from "./reduserData";
 
@@ -15,8 +15,6 @@ interface IContext {
 
 interface IProps extends IData {
   children: ReactNode;
-  // value: IData;
-  // dispatchDataTask: React.Dispatch<IData>
 }
 
 export const SelectBoardContext = React.createContext<IContext>({ data: {}, dispatchData: () => { }, indexActiveBoard: 0, setIndexActiveBoard: () => { } });
@@ -46,7 +44,7 @@ interface ITaskCardProps extends ITask {
 }
 interface ITaskCardContext {
   dataTask: ITask;
-  dispatchDataTask: React.Dispatch<Iaction>;   //оно сделано не обязательным потому что я в душе не евдаю, как передать его как начальное начение при создании контекста. потому что typeSript не хочет понимать что функция это функция а не какая-то другая фигня
+  dispatchDataTask: React.Dispatch<Iaction>;   
 }
 
 const dataTaskdefault: ITask = { title: "", status: "" };
@@ -55,7 +53,9 @@ export const TaskCardContext = React.createContext<ITaskCardContext>({ dataTask:
 
 export const TaskCardProvider: React.FC<ITaskCardProps> = (value) => {
 
-  const [dataTask, dispatchDataTask] = useReducer(reduserDataTask, value);
+  const [dataTask, dispatchDataTask] = useReducer(reduserDataTask, value, InitDataTask);
+
+  // console.log(`Значение при создании контекста`, value, dataTask);
 
   return (
     <TaskCardContext.Provider value={{ dataTask, dispatchDataTask }}>

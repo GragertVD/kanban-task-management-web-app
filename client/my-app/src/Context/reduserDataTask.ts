@@ -1,5 +1,4 @@
-import { IData, ITask } from "../interface";
-import { SelectBoardContext } from "./Context";
+import { ITask } from "../interface";
 
 export enum reduserDataTask_actionType {
   setChecked = 'setChecked',
@@ -28,20 +27,17 @@ export const reduserDataTask = (state: ITask, action: Iaction) => {
       const tempState = { ...state };
       typeof (action.payload) === "string" && (tempState.status = action.payload);
 
-      // let data: IData | undefined;
-      // const dataBoardsString: string | null = localStorage.getItem('dataBoards');
-      // if (dataBoardsString) {
-      //   data = JSON.parse(dataBoardsString);
-      //   if (data?.boards) {
-      //     console.log(data.boards);
-      //     console.log(state);
-      //     console.log(tempState);
-      //   }
-      // }
-
       return { ...tempState };
 
     default:
       return state
   }
-}
+};
+
+export const InitDataTask = (state: ITask):ITask => {
+  // console.log(`Значение в инит`, state);
+  // console.log("in InitDataTask");
+
+  return {...state};
+
+};

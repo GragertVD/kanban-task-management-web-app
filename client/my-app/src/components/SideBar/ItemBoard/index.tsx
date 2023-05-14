@@ -17,12 +17,13 @@ const ItemBoard: React.FC<IPropsItemBoard> = (props) => {
 
 
   return (
-    <Item className={`${props.active ? 'active' : ''}`} onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number = props.index) => {
-      // (e.target as HTMLElement).classList.toggle('active');
-      // console.log(index);
-      setIndexActiveBoard && setIndexActiveBoard(index);
-      // localStorage.setItem('indexActiveBoard', `${index}`);
-    }}><IconBoard />{props.nameBoard}</Item>
+    <Item className={`${props.active ? 'active' : ''}`}
+      onClick={
+        (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number = props.index) => {
+          setIndexActiveBoard(index);
+        }
+      }
+    ><IconBoard />{props.nameBoard}</Item>
   )
 }
 

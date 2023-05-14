@@ -1,24 +1,47 @@
-import { IColumn } from '../../../interface';
+import { IBoard, IColumn } from '../../../interface';
 import TaskCard from '../TaskCard';
 import { BoardColumnContainer, ColumnTasksContainer } from './style';
-import { TaskCardProvider } from "../../../Context/Context";
+import { SelectBoardContext, TaskCardProvider } from "../../../Context/Context";
+import { useContext } from 'react';
 
 
-const BoardColumn: React.FC<IColumn> = (props) => {
+interface IBoardColumn extends IColumn {
+  index?: number;
+}
 
-  return (
-    <BoardColumnContainer>
-      <h4>{props.name} ({props.tasks.length})</h4>
-      <ColumnTasksContainer>
-        {
-          props.tasks.length ?
-            props.tasks.map((dataTask, index) => <TaskCardProvider key={index} {...dataTask}><TaskCard key={index} /></TaskCardProvider>)
-            :
-            <div></div>
-        }
-      </ColumnTasksContainer>
-    </BoardColumnContainer>
-  )
+const BoardColumn: React.FC<IBoardColumn> = (props) => {
+
+  const { data, indexActiveBoard } = useContext(SelectBoardContext);
+
+
+  if (data && data.boards !== undefined && indexActiveBoard !== undefined && props.index !== undefined) {
+    const column: IColumn = data.boards[indexActiveBoard].columns[props.index];
+    console.log("render column ",column);
+    
+    return (
+      <BoardColumnContainer>
+        <h4>{column.name} ({column.tasks.length})</h4>
+        <ColumnTasksContainer>
+          {
+            column.tasks.length
+              ?
+              column.tasks.map(
+                (dataTask, index) =>
+                  <TaskCardProvider key={index} {...dataTask}>
+                    <TaskCard />
+                  </TaskCardProvider>
+              )
+              :
+              <div></div>
+          }
+        </ColumnTasksContainer>
+      </BoardColumnContainer>
+    )
+  } else {
+    return (
+      <div>Load</div>
+    )
+  }
 }
 
 export default BoardColumn;
