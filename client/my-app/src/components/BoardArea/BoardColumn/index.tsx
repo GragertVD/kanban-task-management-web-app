@@ -27,9 +27,9 @@ const BoardColumn: React.FC<IBoardColumn> = (props) => {
               ?
               column.tasks.map(
                 (dataTask, index) =>
-                  <TaskCardProvider key={index} {...dataTask}>
-                    <TaskCard />
-                  </TaskCardProvider>
+                  // <TaskCardProvider key={index} {...dataTask}>
+                  <TaskCard key={index} {...dataTask} />
+                  // </TaskCardProvider> 
               )
               :
               <div></div>

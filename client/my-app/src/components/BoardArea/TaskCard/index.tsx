@@ -3,14 +3,17 @@ import { TaskCardContainer } from "./style";
 import React from "react";
 import { TaskOpen } from '../TaskOpen/index';
 import { useContext } from 'react';
-import { SelectBoardContext, TaskCardContext } from "../../../Context/Context";
-import { IData } from "../../../interface";
+import { SelectBoardContext, TaskCardContext, TaskCardProvider } from "../../../Context/Context";
+import { IData, ITask } from "../../../interface";
 import { reduserData_actionType } from "../../../Context/reduserData";
 import {useEffect} from 'react';
 
 
-const TaskCard: React.FC = () => {
-  const { dataTask } = useContext(TaskCardContext);
+const TaskCard: React.FC<ITask> = (props) => {
+  // const { dataTask } = useContext(TaskCardContext);
+  
+  const dataTask = props;
+
   const { data, dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
 
   const popupClose = () => {
@@ -31,7 +34,7 @@ const TaskCard: React.FC = () => {
   }
 
   return (
-    <>
+    <TaskCardProvider {...dataTask}>
       <TaskCardContainer
         onClick={() => popup.popupOpen()}
       >
@@ -48,7 +51,8 @@ const TaskCard: React.FC = () => {
       <PopupWrapper>
         <TaskOpen />
       </PopupWrapper>
-    </>
+    </TaskCardProvider>
+
   )
 }
 
