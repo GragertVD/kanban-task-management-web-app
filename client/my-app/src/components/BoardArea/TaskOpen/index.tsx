@@ -10,11 +10,15 @@ import SelectStatus from "../../UI/SelectStatus";
 import useDropMenu, { IDropMenuItem } from "../../UI/DropMenu";
 import { reduserData_actionType } from "../../../Context/reduserData";
 
-export const TaskOpen: React.FC = () => {
+export const TaskOpen: React.FC<ITask> = (props) => {
 
-  const { dataTask } = useContext(TaskCardContext);
+  // const { dataTask } = useContext(TaskCardContext);
+  const dataTask = props;
+
   const { dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
 
+  // console.log(dataTask);
+  
 
   const listDropMenu: IDropMenuItem | IDropMenuItem[] =
     [
@@ -41,10 +45,12 @@ export const TaskOpen: React.FC = () => {
       <TaskOpenContainer>
         <Title>
           <h3>{dataTask.title}</h3>
+          {/* <div style={{position:"relative"}}> */}
           <img
             onClick={dropMenu.DropMenuOpen}
             src={iconMenu} alt="картинка" />
           <DropMenuWrapper />
+          {/* </div> */}
         </Title>
         <Description>
           {dataTask.description}

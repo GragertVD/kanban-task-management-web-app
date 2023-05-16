@@ -72,7 +72,13 @@ export const reduserData = (state: IData, action: IactionData) => {
 
       if (newData.boards && state.boards && action.indexActiveBoard !== undefined && action.task) {
 
-        const columnNewId = state.boards[action.indexActiveBoard].columns.findIndex((element) => element.name === columnNewName);
+        const columnNewId = state.boards[action.indexActiveBoard].columns.findIndex((element) => 
+        {
+          console.log(columnNewName);
+          console.log(element.name);
+          
+          
+          return element.name === columnNewName});
 
         let taskId = -1;
         const columnPrevId = state.boards[action.indexActiveBoard].columns.findIndex(
@@ -91,6 +97,7 @@ export const reduserData = (state: IData, action: IactionData) => {
         );
 
         if (taskId !== -1 && columnNewId !== columnPrevId) {
+          console.log(newData.boards[action.indexActiveBoard], columnNewId);
 
           newData.boards[action.indexActiveBoard].columns[columnNewId].tasks.push(action.task);
           newData.boards[action.indexActiveBoard].columns[columnPrevId].tasks.splice(taskId, 1);

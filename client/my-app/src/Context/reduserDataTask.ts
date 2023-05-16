@@ -25,7 +25,10 @@ export const reduserDataTask = (state: ITask, action: Iaction) => {
 
     case reduserDataTask_actionType.changeStatus:
       const tempState = { ...state };
+      console.log(tempState);
+      
       typeof (action.payload) === "string" && (tempState.status = action.payload);
+      // console.log(tempState);
 
       return { ...tempState };
 

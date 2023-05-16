@@ -17,7 +17,9 @@ const TaskCard: React.FC<ITask> = (props) => {
   const { data, dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
 
   const popupClose = () => {
-    dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
+    // console.log(dataTask);
+    
+    // dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
   };
 
   const popup = usePopup(popupClose);
@@ -34,7 +36,8 @@ const TaskCard: React.FC<ITask> = (props) => {
   }
 
   return (
-    <TaskCardProvider {...dataTask}>
+    // <TaskCardProvider {...dataTask}>
+    <>
       <TaskCardContainer
         onClick={() => popup.popupOpen()}
       >
@@ -49,9 +52,10 @@ const TaskCard: React.FC<ITask> = (props) => {
 
       </TaskCardContainer>
       <PopupWrapper>
-        <TaskOpen />
+        <TaskOpen {...dataTask}/>
       </PopupWrapper>
-    </TaskCardProvider>
+    </>
+    // </TaskCardProvider>
 
   )
 }

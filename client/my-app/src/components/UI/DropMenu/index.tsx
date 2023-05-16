@@ -1,6 +1,6 @@
 import React from 'react'
 import { Background, DropMenuConteiner, DropMenuList } from './style';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export interface IDropMenuItem {
   text: string;
@@ -16,8 +16,18 @@ export const useDropMenu = (props: IDropMenuItem | IDropMenuItem[]) => {
     setopenDropMenu(true);
   }
 
+  // useEffect(() => {
+  //   const f = () => console.log("123");
+  //   const elBody = document.querySelector("body");
+  //   if(elBody) elBody.addEventListener("click", f);
+
+  //   return () => {
+  //     // if (elBody) elBody.removeEventListener("click", f);
+  //   }
+  // }, [])
 
   const DropMenuWrapper: React.FC = () => {
+
 
     return (
       <Background openDropMenu={openDropMenu}
