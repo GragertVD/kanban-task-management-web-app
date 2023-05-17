@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { CheckboxContainer } from "./style";
 import { reduserDataTask_actionType } from "../../../Context/reduserDataTask";
-import { TaskCardContext } from "../../BoardArea/TaskCard";
+import { TaskCardContext } from "../../../Context/Context";
 
 
 interface Icheckbox {

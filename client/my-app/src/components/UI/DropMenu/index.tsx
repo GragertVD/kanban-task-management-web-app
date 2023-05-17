@@ -7,7 +7,6 @@ export interface IDropMenuItem {
   action: () => void;
 }
 
-
 export const useDropMenu = (props: IDropMenuItem | IDropMenuItem[]) => {
 
   const [openDropMenu, setopenDropMenu] = useState(false);
@@ -15,7 +14,6 @@ export const useDropMenu = (props: IDropMenuItem | IDropMenuItem[]) => {
   const DropMenuOpen = () => {
     setopenDropMenu(true);
   }
-
 
   const DropMenuWrapper: React.FC = () => {
 

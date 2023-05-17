@@ -3,7 +3,7 @@ import { StyledButton } from './style';
 
 
 interface IPropsButton {
-  onClick?: ()=>void;
+  onClick?: () => void;
   colorBG?: string;
   text: string;
 }

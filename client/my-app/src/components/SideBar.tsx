@@ -5,7 +5,6 @@ import BottomSideBar from './SideBar/BottomSideBar';
 import { IPropsToggleShowSideBar } from '../interface';
 
 
-
 const SideBarContainer = styled.div<{ stateShowSideBar: 'show' | 'hiden' }>(props => ({
   transition: 'all 0.3s',
   left: props.stateShowSideBar === 'show' ? '0px' : '-300px',
@@ -22,23 +21,15 @@ const SideBarContainer = styled.div<{ stateShowSideBar: 'show' | 'hiden' }>(prop
   position: `fixed`,
   top: '96px',
   bottom: '0',
-  // overflowY: 'auto',
 }));
 
 const SideBar: React.FC<IPropsToggleShowSideBar> = (props) => {
 
-
-  // const StateSideBarContext = React.createContext({
-  //   StateSideBar: 'show',
-  // });
-
   return (
-    // <StateSideBarContext.Provider value={'show'}>
     <SideBarContainer stateShowSideBar={props.StateShowSideBar.StateShowSideBar}>
       <ListBoard />
       <BottomSideBar StateShowSideBar={props.StateShowSideBar} />
     </SideBarContainer>
-    // </StateSideBarContext.Provider>
   )
 }
 

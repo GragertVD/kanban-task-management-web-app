@@ -1,24 +1,21 @@
-import { ITask } from "../../../interface";
 import { Description, TaskOpenContainer, Title } from "./style";
 import iconMenu from "../../../img/icon-vertical-ellipsis.svg";
 import React from "react";
-import Checkbox from "../../UI/Checkbox";
-import { useContext } from 'react';
-import { SelectBoardContext } from "../../../Context/Context";
+import { useContext, useEffect } from 'react';
+import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import SubtasksList from "../SubtasksList";
 import SelectStatus from "../../UI/SelectStatus";
 import useDropMenu, { IDropMenuItem } from "../../UI/DropMenu";
 import { reduserData_actionType } from "../../../Context/reduserData";
-import { TaskCardContext } from "../TaskCard";
+
 
 export const TaskOpen: React.FC = () => {
 
   const { dataTask } = useContext(TaskCardContext);
-  console.log("TaskOpen ", dataTask);
+  const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
-  const { dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
-
-
+ 
+  //Создаем массив объектов для выпадающего списка.
   const listDropMenu: IDropMenuItem | IDropMenuItem[] =
     [
       {
@@ -43,7 +40,6 @@ export const TaskOpen: React.FC = () => {
     <>
       <TaskOpenContainer>
         <Title>
-          {/* <h3>{indexActiveBoard}</h3> */}
           <h3>{dataTask.title}</h3>
           <img
             onClick={dropMenu.DropMenuOpen}

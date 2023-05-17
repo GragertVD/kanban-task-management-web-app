@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-document.querySelector('.body')?.addEventListener("onmousemove", 
-(event)=> {
-  event = event || window.event; // кроссбраузерность
-  console.log(event); // вывод в консоль
-})
-
 export const Background = styled.div<{ openDropMenu: boolean }>`
   position: fixed;
   z-index: 10;

@@ -5,7 +5,6 @@ import Toggle from '../../UI/Toggle';
 import { ChangeThemeContainer } from './style';
 
 
-
 const ChageTheme: React.FC = () => {
   const [theme, setTheme] = useState('light');
 
@@ -18,4 +17,4 @@ const ChageTheme: React.FC = () => {
   )
 }
 
-  export default  ChageTheme;
+export default ChageTheme;

@@ -11,14 +11,14 @@ const BoardContainer = styled.div(props => ({
   transition: 'all 0.3s',
 }));
 
-export const Board = () => {
+export const Board: React.FC = () => {
 
   const [StateShowSideBar, setStateShowSideBar] = useState<'show' | 'hiden'>('show');
 
   return (
     <BoardContainer>
       <SideBar StateShowSideBar={{ StateShowSideBar, setStateShowSideBar }} />
-      <BordArea StateShowSideBar={{StateShowSideBar, setStateShowSideBar}} />
+      <BordArea StateShowSideBar={{ StateShowSideBar, setStateShowSideBar }} />
     </BoardContainer>
   )
 }
