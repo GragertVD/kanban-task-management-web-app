@@ -1,6 +1,7 @@
 import { ITask } from "../interface";
 
 export enum reduserDataTask_actionType {
+  load = 'load',
   setChecked = 'setChecked',
   disableChecked = 'disableChecked',
   changeStatus = 'changeStatus',
@@ -8,11 +9,19 @@ export enum reduserDataTask_actionType {
 
 export interface Iaction {
   type: reduserDataTask_actionType;
-  payload: number | string;
+  payload?: number | string;
+  newTask?: ITask;
 }
 
 export const reduserDataTask = (state: ITask, action: Iaction) => {
   switch (action.type) {
+    case reduserDataTask_actionType.load:
+      if (action.newTask){
+        let tempNewTask = action.newTask;
+        return { ...tempNewTask };
+      }
+      return { ...state };
+
     case reduserDataTask_actionType.setChecked:
 
       state.subtasks && typeof (action.payload) === "number" && (state.subtasks[action.payload].isCompleted = true);

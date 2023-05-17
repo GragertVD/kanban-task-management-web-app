@@ -1,6 +1,6 @@
-import { TaskCardContext } from '../../../Context/Context';
 import { IColumn } from '../../../interface';
 import Checkbox from '../../UI/Checkbox';
+import { TaskCardContext } from '../TaskCard';
 import { SubtasksContainer } from './style';
 import { useContext } from 'react';
 

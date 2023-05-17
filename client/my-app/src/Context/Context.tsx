@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactNode, SetStateAction, useEffect, useReducer, useState } from "react";
 import { IData, ITask } from '../interface';
-import { Iaction, InitDataTask, reduserDataTask } from "./reduserDataTask";
+import { Iaction, InitDataTask, reduserDataTask, reduserDataTask_actionType } from "./reduserDataTask";
 import getData from "../utils/getDataJSON";
 import { IactionData, reduserData } from "./reduserData";
 
@@ -47,20 +47,23 @@ interface ITaskCardContext {
   dispatchDataTask: React.Dispatch<Iaction>;   
 }
 
-const dataTaskdefault: ITask = { title: "", status: "" };
+// const dataTaskdefault: ITask = { title: "", status: "" };
 
-export const TaskCardContext = React.createContext<ITaskCardContext>({ dataTask: dataTaskdefault, dispatchDataTask: () => { } });
+// export const TaskCardContext = React.createContext<ITaskCardContext>({ dataTask: dataTaskdefault, dispatchDataTask: () => { } });
 
-export const TaskCardProvider: React.FC<ITaskCardProps> = (value) => {
+// export const TaskCardProvider: React.FC<ITaskCardProps> = (value) => {
 
-  const [dataTask, dispatchDataTask] = useReducer(reduserDataTask, value, InitDataTask);
+//   // console.log("TaskCardProvider ", value);
+//   const [dataTask, dispatchDataTask] = useReducer(reduserDataTask, value);
+//   // dispatchDataTask({ type: reduserDataTask_actionType.load , newTask:value});
+//   // console.log("TaskCardProvider 2", dataTask);
 
-  // console.log(`Значение при создании контекста`, value, dataTask);
+//   // console.log(`Значение при создании контекста`, value, dataTask);
 
-  return (
-    <TaskCardContext.Provider value={{ dataTask, dispatchDataTask }}>
-      {value.children}
-    </TaskCardContext.Provider>
-  )
+//   return (
+//     <TaskCardContext.Provider value={{ dataTask, dispatchDataTask }}>
+//       {value.children}
+//     </TaskCardContext.Provider>
+//   )
 
-}
+// }

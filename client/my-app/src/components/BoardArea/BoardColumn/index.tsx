@@ -1,7 +1,7 @@
 import { IBoard, IColumn } from '../../../interface';
 import TaskCard from '../TaskCard';
 import { BoardColumnContainer, ColumnTasksContainer } from './style';
-import { SelectBoardContext, TaskCardProvider } from "../../../Context/Context";
+import { SelectBoardContext } from "../../../Context/Context";
 import { useContext } from 'react';
 
 
@@ -16,8 +16,8 @@ const BoardColumn: React.FC<IBoardColumn> = (props) => {
 
   if (data && data.boards !== undefined && indexActiveBoard !== undefined && props.index !== undefined) {
     const column: IColumn = data.boards[indexActiveBoard].columns[props.index];
-    console.log("render column ",column);
-    
+    // console.log("render column ",column);
+
     return (
       <BoardColumnContainer>
         <h4>{column.name} ({column.tasks.length})</h4>
@@ -28,8 +28,8 @@ const BoardColumn: React.FC<IBoardColumn> = (props) => {
               column.tasks.map(
                 (dataTask, index) =>
                   // <TaskCardProvider key={index} {...dataTask}>
-                  <TaskCard key={index} {...dataTask} />
-                  // </TaskCardProvider> 
+                  <TaskCard key={indexActiveBoard*10 +index} {...dataTask} />
+                // </TaskCardProvider> 
               )
               :
               <div></div>

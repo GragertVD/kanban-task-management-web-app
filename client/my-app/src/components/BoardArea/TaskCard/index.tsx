@@ -1,20 +1,30 @@
 import { usePopup } from "../../../hooks/usePopup";
 import { TaskCardContainer } from "./style";
-import React from "react";
+import React, { useReducer } from "react";
 import { TaskOpen } from '../TaskOpen/index';
 import { useContext } from 'react';
-import { SelectBoardContext, TaskCardContext, TaskCardProvider } from "../../../Context/Context";
+import { SelectBoardContext } from "../../../Context/Context";
 import { IData, ITask } from "../../../interface";
 import { reduserData_actionType } from "../../../Context/reduserData";
-import {useEffect} from 'react';
+import { useEffect } from 'react';
+import { Iaction, reduserDataTask } from "../../../Context/reduserDataTask";
 
+
+
+interface ITaskCardContext {
+  dataTask: ITask;
+  dispatchDataTask: React.Dispatch<Iaction>;
+}
+
+
+export const TaskCardContext = React.createContext<ITaskCardContext>({ dataTask: { title: "", status: "" }, dispatchDataTask: () => { } });
 
 const TaskCard: React.FC<ITask> = (props) => {
   // const { dataTask } = useContext(TaskCardContext);
-  
+
   const dataTask = props;
 
-  const { data, dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
+  const { dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
 
   const popupClose = () => {
     dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
@@ -33,8 +43,15 @@ const TaskCard: React.FC<ITask> = (props) => {
     quantitySubtasksComlited = subtasksComlited.length;
   }
 
+  console.log("TaskCard ", dataTask);
+
+  const [dataTaskContext, dispatchDataTask] = useReducer(reduserDataTask, dataTask);
+  // const TaskCardContext = React.createContext<ITaskCardContext>({ dataTask: dataTaskContext, dispatchDataTask: dispatchDataTask });
+  console.log("dataTaskContext ", dataTaskContext);
+
+
   return (
-    <TaskCardProvider {...dataTask}>
+    <TaskCardContext.Provider value={{ dataTask: dataTaskContext, dispatchDataTask: dispatchDataTask }}>
       <TaskCardContainer
         onClick={() => popup.popupOpen()}
       >
@@ -51,7 +68,7 @@ const TaskCard: React.FC<ITask> = (props) => {
       <PopupWrapper>
         <TaskOpen />
       </PopupWrapper>
-    </TaskCardProvider>
+    </TaskCardContext.Provider>
 
   )
 }
