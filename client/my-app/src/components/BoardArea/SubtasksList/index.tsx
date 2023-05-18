@@ -1,5 +1,4 @@
 import { TaskCardContext } from '../../../Context/Context';
-import { IColumn } from '../../../interface';
 import Checkbox from '../../UI/Checkbox';
 import { SubtasksContainer } from './style';
 import { useContext } from 'react';
@@ -26,7 +25,7 @@ const SubtasksList: React.FC = () => {
           :
           <p>{quantitySubtasksComlited} of {quantitySubtasksAll} substasks</p>
       }
-      {   //Строка с учетом выполненых подзадач
+      {   //чеклист с подзадачами
         dataTask.subtasks !== undefined
           ?
           dataTask.subtasks.map((subtask, index) =>

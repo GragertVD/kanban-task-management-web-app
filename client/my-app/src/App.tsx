@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import styled from 'styled-components';
-import getData from './utils/getDataJSON';
 import { Board } from './components/Board';
-import { SelectBoardProvider } from './Context/Context';
+import { BoardsProvider } from './Context/Context';
 
 
 const AppContainer = styled.div`
@@ -13,22 +11,15 @@ const AppContainer = styled.div`
   overflow: hidden;
 `;
 
-
 function App() {
-  // const [data, setData] = usecState([]);
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
 
   return (
-    <SelectBoardProvider>
+    <BoardsProvider>
       <AppContainer className="App">
         <Header />
         <Board />
       </AppContainer>
-    </SelectBoardProvider>
+    </BoardsProvider>
   );
 }
 

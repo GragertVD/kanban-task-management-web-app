@@ -8,13 +8,13 @@ export enum reduserDataTask_actionType {
 
 export interface Iaction {
   type: reduserDataTask_actionType;
-  payload: number | string;
+  payload?: number | string;
 }
 
 export const reduserDataTask = (state: ITask, action: Iaction) => {
   switch (action.type) {
-    case reduserDataTask_actionType.setChecked:
 
+    case reduserDataTask_actionType.setChecked:
       state.subtasks && typeof (action.payload) === "number" && (state.subtasks[action.payload].isCompleted = true);
 
       return { ...state };
@@ -35,12 +35,4 @@ export const reduserDataTask = (state: ITask, action: Iaction) => {
     default:
       return state
   }
-};
-
-export const InitDataTask = (state: ITask):ITask => {
-  // console.log(`Значение в инит`, state);
-  // console.log("in InitDataTask");
-
-  return {...state};
-
 };

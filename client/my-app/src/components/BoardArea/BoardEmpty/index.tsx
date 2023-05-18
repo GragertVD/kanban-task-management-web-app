@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BoardEmptyContainer } from './style';
 import Button from '../../UI/Button';
 import { reduserData_actionType } from '../../../Context/reduserData';
-import { SelectBoardContext } from '../../../Context/Context';
+import { BoardsContext } from '../../../Context/Context';
 import { useContext } from 'react';
-
 
 
 const BoardEmpty: React.FC = () => {
 
-  const { dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
+  const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
   const addColumn = () => {
     dispatchData({ type: reduserData_actionType.addColumn, indexActiveBoard });

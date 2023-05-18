@@ -1,25 +1,23 @@
 import React, { useContext } from "react";
 import { SelectStatusContainer } from "./style";
-import { SelectBoardContext, TaskCardContext } from "../../../Context/Context";
+import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { IBoard, IData } from "../../../interface";
+import { IBoard } from "../../../interface";
 import { reduserDataTask_actionType } from "../../../Context/reduserDataTask";
-
+import { reduserData_actionType } from "../../../Context/reduserData";
 
 
 const SelectStatus: React.FC = () => {
 
   const { dataTask, dispatchDataTask } = useContext(TaskCardContext);
-
-  const { data, indexActiveBoard } = useContext(SelectBoardContext);
-
+  const { dispatchData, data, indexActiveBoard } = useContext(BoardsContext);
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log("Change status");
     
-    dispatchDataTask({ type: reduserDataTask_actionType.changeStatus, payload: event.target.value})
-  };
+    dispatchDataTask({ type: reduserDataTask_actionType.changeStatus, payload: event.target.value });
+
+  }
 
   if (data && data.boards && indexActiveBoard !== undefined) {
     const activeBoard: IBoard = data.boards[indexActiveBoard];

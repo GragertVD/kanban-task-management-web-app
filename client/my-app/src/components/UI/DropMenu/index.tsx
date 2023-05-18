@@ -7,7 +7,6 @@ export interface IDropMenuItem {
   action: () => void;
 }
 
-
 export const useDropMenu = (props: IDropMenuItem | IDropMenuItem[]) => {
 
   const [openDropMenu, setopenDropMenu] = useState(false);
@@ -15,16 +14,6 @@ export const useDropMenu = (props: IDropMenuItem | IDropMenuItem[]) => {
   const DropMenuOpen = () => {
     setopenDropMenu(true);
   }
-
-  // useEffect(() => {
-  //   const f = () => console.log("123");
-  //   const elBody = document.querySelector("body");
-  //   if(elBody) elBody.addEventListener("click", f);
-
-  //   return () => {
-  //     // if (elBody) elBody.removeEventListener("click", f);
-  //   }
-  // }, [])
 
   const DropMenuWrapper: React.FC = () => {
 
@@ -47,7 +36,6 @@ export const useDropMenu = (props: IDropMenuItem | IDropMenuItem[]) => {
           </DropMenuList>
         </DropMenuConteiner>
       </Background>
-
 
     )
   }

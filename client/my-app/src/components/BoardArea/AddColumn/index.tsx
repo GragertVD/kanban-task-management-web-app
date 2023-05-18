@@ -1,13 +1,12 @@
 import React, { useContext } from 'react'
 import { AddColumnContainer } from './style';
-import { SelectBoardContext } from '../../../Context/Context';
+import { BoardsContext } from '../../../Context/Context';
 import { reduserData_actionType } from '../../../Context/reduserData';
-
 
 
 const AddColumn: React.FC = () => {
 
-  const { dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
+  const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
   const addColumn = () => {
     dispatchData({ type: reduserData_actionType.addColumn, indexActiveBoard });
@@ -15,9 +14,7 @@ const AddColumn: React.FC = () => {
 
   return (
     <AddColumnContainer>
-      <p
-        onClick={addColumn}
-      >+ New Column</p>
+      <p onClick={addColumn}>+ New Column</p>
     </AddColumnContainer>
   )
 }

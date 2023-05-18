@@ -4,8 +4,7 @@ import Logo from './UI/Logo'
 import Button from './UI/Button'
 import iconMenu from "../img/icon-vertical-ellipsis.svg";
 import { useContext } from 'react';
-import { SelectBoardContext } from '../Context/Context';
-import { IData } from '../interface';
+import { BoardsContext } from '../Context/Context';
 
 const StyledHeader = styled.div`
   display: flex;
@@ -30,12 +29,7 @@ const StyledHeader = styled.div`
 
 const Header = () => {
 
-  const {data, indexActiveBoard } = useContext(SelectBoardContext);
-  // let data: IData | undefined;
-  // const dataBoardsString: string | null = localStorage.getItem('dataBoards');
-  // if (dataBoardsString) {
-  //   data = JSON.parse(dataBoardsString);
-  // }
+  const { data, indexActiveBoard } = useContext(BoardsContext);
 
   return (
     <StyledHeader>

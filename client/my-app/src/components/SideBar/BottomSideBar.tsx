@@ -10,11 +10,8 @@ const BottomSideBarContainer = styled.div`
   row-gap: 8px;
 `;
 
-interface IPropsBottomSideBar extends IPropsToggleShowSideBar {
 
-}
-
-const BottomSideBar: React.FC<IPropsBottomSideBar> = (props) => {
+const BottomSideBar: React.FC<IPropsToggleShowSideBar> = (props) => {
   return (
     <BottomSideBarContainer>
       <ChageTheme />

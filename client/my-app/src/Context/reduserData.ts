@@ -36,9 +36,8 @@ export const reduserData = (state: IData, action: IactionData) => {
       return { ...state };
 
     case reduserData_actionType.deleteTask:
-      // const newBoard: IBoard = { name: "new Board", columns: [] };
 
-      if (state.boards && action.indexActiveBoard !== undefined && action.task !== undefined){
+      if (state.boards && action.indexActiveBoard !== undefined && action.task !== undefined) {
         let taskId = -1;
         const columnId = state.boards[action.indexActiveBoard].columns.findIndex(
           (column) => {
@@ -66,22 +65,20 @@ export const reduserData = (state: IData, action: IactionData) => {
       return state;
 
     case reduserData_actionType.taskChangeStatus:
-      const columnNewName = (action.task as ITask).status;
-      const taskTitle = (action.task as ITask).title;
-      const newData = { ...state };
+      let columnNewName: string = "";
+      let taskTitle: string = "";
+      const newData: IData = { ...state };
+      let columnPrevId: number = -1;
+      let columnNewId: number = -1;
+      let taskId: number = -1;
 
       if (newData.boards && state.boards && action.indexActiveBoard !== undefined && action.task) {
+        taskTitle = action.task.title;
+        columnNewName = action.task.status;
 
-        const columnNewId = state.boards[action.indexActiveBoard].columns.findIndex((element) => 
-        {
-          console.log(columnNewName);
-          console.log(element.name);
-          
-          
-          return element.name === columnNewName});
+        columnNewId = state.boards[action.indexActiveBoard].columns.findIndex((element) => (element.name === columnNewName));
 
-        let taskId = -1;
-        const columnPrevId = state.boards[action.indexActiveBoard].columns.findIndex(
+        columnPrevId = state.boards[action.indexActiveBoard].columns.findIndex(
           (column) => {
             taskId = column.tasks.findIndex((task) => {
               if (task)
@@ -96,11 +93,10 @@ export const reduserData = (state: IData, action: IactionData) => {
           }
         );
 
-        if (taskId !== -1 && columnNewId !== columnPrevId) {
-          console.log(newData.boards[action.indexActiveBoard], columnNewId);
+        if (taskId !== -1 && columnNewId !== columnPrevId && columnNewId !== -1) {
 
-          newData.boards[action.indexActiveBoard].columns[columnNewId].tasks.push(action.task);
           newData.boards[action.indexActiveBoard].columns[columnPrevId].tasks.splice(taskId, 1);
+          newData.boards[action.indexActiveBoard].columns[columnNewId].tasks.push(action.task);
 
           return { ...newData };
         }

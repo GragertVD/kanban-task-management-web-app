@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components';
-import { IBoard, IData, IPropsToggleShowSideBar } from '../interface';
+import { IBoard, IPropsToggleShowSideBar } from '../interface';
 import BoardEmpty from './BoardArea/BoardEmpty';
 import BoardColumn from './BoardArea/BoardColumn';
-import { SelectBoardContext } from '../Context/Context';
+import { BoardsContext } from '../Context/Context';
 import AddColumn from './BoardArea/AddColumn';
 
 
@@ -26,21 +26,12 @@ const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', coun
 
 export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
 
-  // const data: IData = useContext(dataContext);
-  // let data: IData | undefined;
-  // const dataBoardsString: string | null = localStorage.getItem('dataBoards');
-  // if (dataBoardsString) {
-  //   data = JSON.parse(dataBoardsString);
-  // }
-
-  // let indexActiveBoard: string | null = localStorage.getItem('indexActiveBoard');
-  const { data, indexActiveBoard } = useContext(SelectBoardContext);
+  const { data, indexActiveBoard } = useContext(BoardsContext);
 
 
   if (data && data.boards !== undefined && indexActiveBoard !== undefined) {
-    // console.log(data.boards[0].columns);
     const activeBoard: IBoard = data.boards[indexActiveBoard];
-    // console.log(activeBoard.columns[0].tasks);
+    
     if (activeBoard.columns.length) {
       return (
         <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={activeBoard.columns.length + 1}>

@@ -1,25 +1,21 @@
-import { ITask } from "../../../interface";
 import { Description, TaskOpenContainer, Title } from "./style";
 import iconMenu from "../../../img/icon-vertical-ellipsis.svg";
 import React from "react";
-import Checkbox from "../../UI/Checkbox";
-import { useContext } from 'react';
-import { SelectBoardContext, TaskCardContext } from "../../../Context/Context";
+import { useContext, useEffect } from 'react';
+import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import SubtasksList from "../SubtasksList";
 import SelectStatus from "../../UI/SelectStatus";
 import useDropMenu, { IDropMenuItem } from "../../UI/DropMenu";
 import { reduserData_actionType } from "../../../Context/reduserData";
 
-export const TaskOpen: React.FC<ITask> = (props) => {
 
-  // const { dataTask } = useContext(TaskCardContext);
-  const dataTask = props;
+export const TaskOpen: React.FC = () => {
 
-  const { dispatchData, indexActiveBoard } = useContext(SelectBoardContext);
+  const { dataTask } = useContext(TaskCardContext);
+  const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
-  // console.log(dataTask);
-  
-
+ 
+  //Создаем массив объектов для выпадающего списка.
   const listDropMenu: IDropMenuItem | IDropMenuItem[] =
     [
       {
