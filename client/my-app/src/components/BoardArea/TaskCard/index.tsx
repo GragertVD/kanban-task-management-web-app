@@ -14,7 +14,7 @@ const TaskCard: React.FC = () => {
   const popupClose = () => {
     // console.log(dataTask);
     
-    // dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
+    dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
   };
 
   const popup = usePopup(popupClose);
@@ -43,7 +43,7 @@ const TaskCard: React.FC = () => {
         }
       </TaskCardContainer>
       <PopupWrapper>
-        <TaskOpen {...dataTask}/>
+        <TaskOpen />
       </PopupWrapper>
     </>
   )
