@@ -1,6 +1,6 @@
 import { Description, TaskOpenContainer, Title } from "./style";
 import iconMenu from "../../../img/icon-vertical-ellipsis.svg";
-import React from "react";
+import React, { useState } from "react";
 import { useContext, useEffect } from 'react';
 import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import SubtasksList from "../SubtasksList";
@@ -36,6 +36,8 @@ export const TaskOpen: React.FC = () => {
   const dropMenu = useDropMenu(listDropMenu);
   const DropMenuWrapper = dropMenu.DropMenuWrapper;
 
+  const [showDropMenu, setshowDropMenu] = useState(false);
+  // dropMenu.DropMenuOpen();
   return (
     <>
       <TaskOpenContainer>
@@ -43,9 +45,16 @@ export const TaskOpen: React.FC = () => {
           <h3>{dataTask.title}</h3>
           {/* <div style={{position:"relative"}}> */}
           <img
-            onClick={dropMenu.DropMenuOpen}
+            onClick={() => setshowDropMenu(!showDropMenu)}
             src={iconMenu} alt="картинка" />
-          <DropMenuWrapper />
+          {
+            showDropMenu
+            ?
+            <DropMenuWrapper />
+            :
+            <></>
+
+          }
           {/* </div> */}
         </Title>
         <Description>
