@@ -1,61 +1,42 @@
-import React from 'react'
-import { Background, DropMenuConteiner, DropMenuList } from './style';
-import { useState, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useRef } from 'react'
+import { DropMenuConteiner, DropMenuList } from './style';
+import { useEffect } from 'react';
+import { useOutsideClick } from '../../../hooks/useOutsideClick';
 
-export interface IDropMenuItem {
+export interface IMenuItem {
   text: string;
   action: () => void;
 }
 
-export const useDropMenu = (props: IDropMenuItem | IDropMenuItem[]) => {
+export interface IDropMenu {
+  listItem: IMenuItem | IMenuItem[];
+  close: Dispatch<SetStateAction<boolean>>;
+}
 
-  const [openDropMenu, setopenDropMenu] = useState(true);
+const DropMenu: React.FC<IDropMenu> = (props) => {
 
-  const DropMenuOpen = () => {
-    setopenDropMenu(true);
-  }
+  const refDropMenu = useRef(null);
+  useOutsideClick({ element: refDropMenu, setStateOutsideClick: props.close })
 
-  const DropMenuWrapper: React.FC = () => {
-    useEffect(() => {
-      console.log("useEffect DropMenu");
-      document.addEventListener("click", ()=>console.log(123))
 
-      return () => {
-      }
-    }, []);
-
-    if (openDropMenu)
-      return (
-        // <Background openDropMenu={openDropMenu}
-        //   onClick={() => setopenDropMenu(false)}
-        // >
-        <>
-          <DropMenuConteiner openDropMenu={openDropMenu}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <DropMenuList>
-              {
-                Array.isArray(props)
-                  ?
-                  props.map((item, index) => <li key={index} onClick={item.action}>{item.text}</li>)
-                  :
-                  <li onClick={props.action}>{props.text}</li>
-              }
-            </DropMenuList>
-          </DropMenuConteiner>
-        </>
-        // </Background>
-
-      )
-    else
-      return (<></>)
-  }
-
-  return { DropMenuOpen, DropMenuWrapper }
-
-};
+  return (
+    <DropMenuConteiner ref={refDropMenu}>
+      <DropMenuList>
+        {
+          Array.isArray(props.listItem)
+          ?
+          props.listItem.map((item, index) => <li key={index} onClick={item.action}>{item.text}</li>)
+          :
+            <li onClick={props.listItem.action}>{props.listItem.text}</li>
+        }
+      </DropMenuList>
+    </DropMenuConteiner>
+  )
+}
 
 
 
 
-export default useDropMenu;
+
+
+export default DropMenu;

@@ -1,30 +1,30 @@
 import styled from 'styled-components';
 
-export const Background = styled.div<{ openDropMenu: boolean }>`
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+// export const Background = styled.div<{ openDropMenu: boolean }>`
+//   position: fixed;
+//   z-index: 10;
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-evenly;
   
-  transition: all 0.35s;
-  background-color: transparent;
-  pointer-events: ${props => props.openDropMenu ? 'all' : 'none'};
+//   transition: all 0.35s;
+//   background-color: transparent;
+//   pointer-events: ${props => props.openDropMenu ? 'all' : 'none'};
 
-`;
+// `;
 
-export const DropMenuConteiner = styled.div<{ openDropMenu: boolean }>`
+export const DropMenuConteiner = styled.div`
   position: absolute;
   z-index: 11;
   width: 190px;
 
   transition: all 0.35s;
-  transform: scale(${props => props.openDropMenu ? 1 : 0});
-  pointer-events: ${props => props.openDropMenu ? 'all' : 'none'};
+  transform: scale(${props => 1? 1 : 0});
+  pointer-events: ${props => 1 ? 'all' : 'none'};
 
   background-color: ${props => props.theme.colors.white};
   box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);

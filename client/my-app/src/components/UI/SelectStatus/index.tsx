@@ -5,7 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { IBoard } from "../../../interface";
 import { reduserDataTask_actionType } from "../../../Context/reduserDataTask";
-import { reduserData_actionType } from "../../../Context/reduserData";
 
 
 const SelectStatus: React.FC = () => {
@@ -14,9 +13,7 @@ const SelectStatus: React.FC = () => {
   const { dispatchData, data, indexActiveBoard } = useContext(BoardsContext);
 
   const handleChange = (event: SelectChangeEvent) => {
-    
     dispatchDataTask({ type: reduserDataTask_actionType.changeStatus, payload: event.target.value });
-
   }
 
   if (data && data.boards && indexActiveBoard !== undefined) {
@@ -29,7 +26,7 @@ const SelectStatus: React.FC = () => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={dataTask.status}
-          label={dataTask.status}
+          label="status"
           onChange={handleChange}
         >
           {

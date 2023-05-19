@@ -19,23 +19,45 @@ export const usePopup = (popupClose?: Function) => {
     const closeCardFromKey = (e: KeyboardEvent) => {
       if (e.code === 'Escape') {
         popupClose && popupClose();
-        setOpenPopup(false);
         document.removeEventListener('keydown', closeCardFromKey);
+        setOpenPopup(false);
       }
+    };
+
+    const closeCardFromClick = (e: MouseEvent) => {
+      // if(openPopup){
+
+      const elCardContainer = document.querySelector(".card_container");
+      const target = (e.target as Node);
+      console.log("click");
+
+      if (!elCardContainer?.contains(target)) {
+        popupClose && popupClose();
+        document.removeEventListener('click', closeCardFromClick);
+        setOpenPopup(false);
+      }
+      // }
     };
 
     if (openPopup) {
       document.addEventListener('keydown', closeCardFromKey);
+      document.addEventListener('click', closeCardFromClick);
     }
 
     return (
       <Background openCard={openPopup}
-        onClick={() => { popupClose && popupClose(); setOpenPopup(false)}}
+      // onClick={() => { popupClose && popupClose(); setOpenPopup(false)}}
       >
-        <CardContainer openCard={openPopup}
-          onClick={(e) => e.stopPropagation()}
+        <CardContainer className='card_container' openCard={openPopup}
+        // onClick={(e) => e.stopPropagation()}
         >
-          {props.children}
+          {
+            openPopup
+              ?
+              props.children
+              :
+              <></>
+          }
         </CardContainer>
       </Background>
     )

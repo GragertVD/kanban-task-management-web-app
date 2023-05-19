@@ -32,5 +32,6 @@ export const ColumnTasksContainer = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 20px;
+  width: 100%;
 
 `;

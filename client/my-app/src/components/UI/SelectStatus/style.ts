@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import icon_check from "../../../img/icon-check.svg";
 
 export const SelectStatusContainer = styled.div`
-
   width: 100%;
   display: flex;
   flex-direction: column;
