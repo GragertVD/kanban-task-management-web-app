@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction, useRef } from 'react'
 import { DropMenuConteiner, DropMenuList } from './style';
-import { useEffect } from 'react';
 import { useOutsideClick } from '../../../hooks/useOutsideClick';
 
 export interface IMenuItem {

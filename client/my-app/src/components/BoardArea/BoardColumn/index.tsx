@@ -3,7 +3,6 @@ import TaskCard from '../TaskCard';
 import { BoardColumnContainer, ColumnTasksContainer } from './style';
 import { BoardsContext, TaskCardProvider } from "../../../Context/Context";
 import { useContext } from 'react';
-import TaskElContext from '../TaskElContext';
 
 
 interface IBoardColumn extends IColumn {

@@ -15,9 +15,6 @@ const TaskCard: React.FC = () => {
     dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
   };
 
-  const popup = usePopup(popupClose);
-  const PopupWrapper = popup.PopupWrapper;
-
   const [openCard, setOpenCard] = useState(false);
 
   let quantitySubtasksAll: number = 0;

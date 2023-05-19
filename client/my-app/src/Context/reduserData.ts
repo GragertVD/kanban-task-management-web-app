@@ -6,6 +6,7 @@ export enum reduserData_actionType {
   addColumn = 'addColumn',
   addBoard = 'addBoard',
   deleteTask = 'deleteTask',
+  deleteBoard = 'deleteBoard',
 }
 
 export interface IactionData {
@@ -103,7 +104,14 @@ export const reduserData = (state: IData, action: IactionData) => {
       }
 
       return { ...state };
+   
+    case reduserData_actionType.deleteBoard:
+      // const newBoard: IBoard = { name: "new Board", columns: [] };
+      if (state.boards && action.indexActiveBoard !== undefined) 
+        state.boards.splice(action.indexActiveBoard, 1);
 
+      return { ...state };
+    
     default:
       return state
   }
