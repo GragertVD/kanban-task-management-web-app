@@ -11,6 +11,31 @@ const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', coun
   background-color: ${props => props.theme.colors.lightGrey};
   /* height: 100%; */
   overflow: auto;
+   &::-webkit-scrollbar-thumb {
+    background-color: ${props => props.theme.colors.mainPurpleHover};
+    border-radius: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${props => props.theme.colors.mediumGrey};
+    border-radius: 20px;
+    
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: ${props => props.theme.colors.mediumGrey};
+    border-radius: 20px;
+    
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 20px;
+    
+  }
+  & {
+    -ms-overflow-style: auto;
+    scrollbar-color: ${props => props.theme.colors.mainPurpleHover} ${props => props.theme.colors.mediumGrey};
+    scrollbar-width: thin;
+  }
   width: 100vw;
   transition: all 0.3s;
   padding-top: 24px;

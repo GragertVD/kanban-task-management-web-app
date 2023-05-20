@@ -2,17 +2,8 @@ import styled from "styled-components";
 
 export const SubtaskItemContainer = styled.div`
   width: 100%;
-  p{
-    font-family: 'Plus Jakarta Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 15px;
-
-    color: ${props => props.theme.colors.mediumGrey};
-    margin-bottom: 8px;
-  }
-  
+  display: flex;
+  align-items: center;
   input{
     width: 100%;
     height: 40px;
@@ -27,6 +18,18 @@ export const SubtaskItemContainer = styled.div`
     &:focus{
       outline: none;
       border: 1px solid ${props => props.theme.colors.mainPurple};
-    }
+    }    
   }
+  
+  &:not(last-child){
+    margin-bottom: 12px;
+  }
+
+`;
+
+export const IconCrossContainer = styled.div`
+  margin-left: 10px;
+  height: 100%;
+  padding: 5px;
+  cursor: pointer;
 `;

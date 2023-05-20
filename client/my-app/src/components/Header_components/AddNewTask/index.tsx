@@ -1,6 +1,6 @@
 import { Background, InputDescriptionContainer, InputTitleContainer, NewTaskContainerForm, TitleNewTask } from "./style";
 import React, { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { BoardsContext } from "../../../Context/Context";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { useInput } from "../../../hooks/useInput";
@@ -16,25 +16,33 @@ interface ITaskOpen {
 
 export const AddNewtask: React.FC<ITaskOpen> = ({ closeSetState }) => {
 
+  //Получаем данные текущей доски
   const { data, dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
+  //вешаем закрытие на открытое окно
   const refTaskContainer = useRef(null);
   useOutsideClick({ element: refTaskContainer, setStateOutsideClick: closeSetState });
 
+  //Состояние для заполнения новой задачи
   const inputTitle = useInput('');
   const inputDescription = useInput('');
   const [selectStatus, setSelectStatus] = useState(data.boards ? data.boards[indexActiveBoard].columns[0].name : '');
-  const [subtaskListTitle, setSubtaskListTitle] = useState(["", ""]);
+  const [subtaskListTitle, setSubtaskListTitle] = useState([""]);
 
-//При отправки формы создаем новую задачу, заполняем её и добавляем в доску
-  const MySubmit = (e: FormEvent<HTMLFormElement>) => { 
+  //При отправки формы создаем новую задачу, заполняем её и добавляем в доску
+  const MySubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    
+    if (inputTitle.value.length < 1) {
+      alert("Нельзя создать задачу без названия")
+      return;
+    }
+
     // Создаем массив подзадач из списка названий подзадач
     let tempSubtask: ISubtask[] = [];
     subtaskListTitle.forEach(subtaskTitle => {
-      tempSubtask = tempSubtask.concat({ title: subtaskTitle, isCompleted: false});
+      if (subtaskTitle.length > 1)
+        tempSubtask = tempSubtask.concat({ title: subtaskTitle, isCompleted: false });
     });
 
     const newTask: ITask = {

@@ -2,15 +2,43 @@ import styled from 'styled-components';
 
 export const NewTaskContainerForm = styled.form`
   width: 480px;
+  max-height: 85vh;
   background-color: ${props => props.theme.colors.white};
   border-radius: 5px;
   padding: 32px;
-
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  /* margin-top: 60px; */
   /* transition: all 0.3s; */
+  overflow-y: auto;
+  &::-webkit-scrollbar-thumb {
+    background-color: ${props => props.theme.colors.mainPurpleHover};
+    border-radius: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${props => props.theme.colors.mediumGrey};
+    border-radius: 20px;
+    
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: ${props => props.theme.colors.mediumGrey};
+    border-radius: 20px;
+    
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 20px;
+    
+  }
+  & {
+    -ms-overflow-style: auto;
+    scrollbar-color: ${props => props.theme.colors.mainPurpleHover} ${props => props.theme.colors.mediumGrey};
+    scrollbar-width: thin;
+  }
 `;
 
 export const TitleNewTask = styled.h3`
@@ -65,7 +93,7 @@ export const InputDescriptionContainer = styled.div`
   textarea{
     resize: none;
     width: 100%;
-    height: 112px;
+    max-height: 120px;
     padding: 8px 16px;
     ${props => props.theme.fonts.body_L};
     border-radius: 4px;
@@ -98,5 +126,34 @@ export const Background = styled.div`
   transition: all 0.35s;
   background-color: rgba(0, 0, 0,  0.35);
   pointer-events: all;
+  
+  padding: 30px 0;
+  
+  overflow-y: auto;
+    &::-webkit-scrollbar-thumb {
+    background-color: ${props => props.theme.colors.mainPurpleHover};
+    border-radius: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${props => props.theme.colors.mediumGrey};
+    border-radius: 20px;
+    
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: ${props => props.theme.colors.mediumGrey};
+    border-radius: 20px;
+    
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 20px;
+    
+  }
+  & {
+    -ms-overflow-style: auto;
+    scrollbar-color: ${props => props.theme.colors.mainPurpleHover} ${props => props.theme.colors.mediumGrey};
+    scrollbar-width: thin;
+  }
 
 `;

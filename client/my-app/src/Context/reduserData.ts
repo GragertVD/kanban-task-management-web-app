@@ -55,8 +55,10 @@ export const reduserData = (state: IData, action: IactionData) => {
               return false;
           }
         )
-        if(columnId !== -1)
+        if(columnId !== -1){
+          alert("Задача с таким названием уже существует")
           return state;
+        }
         
         const idColumn = state.boards[action.indexActiveBoard].columns.findIndex((column) => column.name === (action.task as ITask).status);
         state.boards[action.indexActiveBoard].columns[idColumn].tasks.push(action.task);

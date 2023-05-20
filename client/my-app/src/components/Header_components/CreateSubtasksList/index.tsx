@@ -1,8 +1,8 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, MouseEvent } from 'react';
 import { ISubtask } from '../../../interface';
 import Button from '../../UI/Button';
 import { CreateSubtaskItem } from '../CreateSubtaskItem';
-import { SubtasksContainer } from './style';
+import { SubtasksContainer, SubtasksListContainer } from './style';
 
 interface ICreateSubtasksList {
   subtaskListTitle: string[];
@@ -23,21 +23,39 @@ const CreateSubtasksList: React.FC<ICreateSubtasksList> = ({ subtaskListTitle, s
     setSubtaskListTitle(subtaskListTitle.concat(""));
   }
 
+  const deleteSubtask = (e: MouseEvent<HTMLDivElement>) => {
+    const idSubtask = e.currentTarget.getAttribute("data-index");
+    const newSubtaskList = subtaskListTitle.concat();
+
+    newSubtaskList.splice(Number(idSubtask), 1);
+    console.log(newSubtaskList);
+
+    setSubtaskListTitle(newSubtaskList.concat());
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
   return (
     <SubtasksContainer>
       <p>substasks</p>
-      {   //чеклист с подзадачами
-        // dataTask.subtasks !== undefined
-        //   ?
-        subtaskListTitle.map((subtask, index) =>
-          <CreateSubtaskItem
-            key={index}
-            index={index}
-            value={subtask}
-            onChange={onChange}
-          />)
-        //   :
-        //   <div>subtask missing</div>
+      {
+        subtaskListTitle.length > 0
+          ?
+          <SubtasksListContainer>
+            {
+              subtaskListTitle.map((subtask, index) =>
+                <CreateSubtaskItem
+                  key={index}
+                  index={index}
+                  value={subtask}
+                  onChange={onChange}
+                  deleteSubtask={deleteSubtask}
+                />)
+
+            }
+          </SubtasksListContainer>
+          :
+          <></>
       }
       <Button
         onClick={AddNewSubtask}

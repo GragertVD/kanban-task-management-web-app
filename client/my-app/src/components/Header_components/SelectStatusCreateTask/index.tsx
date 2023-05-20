@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { SelectStatusContainer } from "./style";
-import { BoardsContext, TaskCardContext } from "../../../Context/Context";
+import { BoardsContext } from "../../../Context/Context";
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { IBoard } from "../../../interface";
