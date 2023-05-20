@@ -7,6 +7,7 @@ export enum reduserData_actionType {
   addBoard = 'addBoard',
   deleteTask = 'deleteTask',
   deleteBoard = 'deleteBoard',
+  addTask = 'addTask',
 }
 
 export interface IactionData {
@@ -35,6 +36,34 @@ export const reduserData = (state: IData, action: IactionData) => {
         state.boards.push(newBoard);
 
       return { ...state };
+
+    case reduserData_actionType.addTask:
+      console.log("addTask");
+      if (state.boards && action.indexActiveBoard !== undefined && action.task !== undefined){
+        //функция вызывается дважды, поэотму сделал блокирую добавление двух задач с одинаковым именем, пока там, позже обдумаю надо ли вообще позволять создавать одинаковые задачи. навреное нет, потмоу что запарно реализовывать в данном учебном проекте, хотя функционал нужен. Надо подумать
+        const columnId = state.boards[action.indexActiveBoard].columns.findIndex(
+          (column) => {
+            const taskId = column.tasks.findIndex((task) => {
+              if (task)
+                return (task.title === (action.task as ITask).title)
+              else
+                return 0;
+            });
+            if (taskId !== -1)
+              return true;
+            else
+              return false;
+          }
+        )
+        if(columnId !== -1)
+          return state;
+        
+        const idColumn = state.boards[action.indexActiveBoard].columns.findIndex((column) => column.name === (action.task as ITask).status);
+        state.boards[action.indexActiveBoard].columns[idColumn].tasks.push(action.task);
+        return { ...state };
+
+      }
+      return state;
 
     case reduserData_actionType.deleteTask:
 
@@ -104,14 +133,14 @@ export const reduserData = (state: IData, action: IactionData) => {
       }
 
       return { ...state };
-   
+
     case reduserData_actionType.deleteBoard:
       // const newBoard: IBoard = { name: "new Board", columns: [] };
-      if (state.boards && action.indexActiveBoard !== undefined) 
+      if (state.boards && action.indexActiveBoard !== undefined)
         state.boards.splice(action.indexActiveBoard, 1);
 
       return { ...state };
-    
+
     default:
       return state
   }
