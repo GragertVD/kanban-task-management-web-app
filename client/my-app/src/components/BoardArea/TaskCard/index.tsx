@@ -27,7 +27,7 @@ const TaskCard: React.FC = () => {
 
   return (
     <>
-      <TaskCardContainer onClick={() => setOpenCard(true)}>
+      <TaskCardContainer draggable="true" onClick={() => setOpenCard(true)}>
         <h5>{dataTask.title}</h5>
         {   //Строка с учетом выполненых подзадач
           quantitySubtasksAll === 0 ?

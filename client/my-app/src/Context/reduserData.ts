@@ -7,6 +7,7 @@ export enum reduserData_actionType {
   addBoard = 'addBoard',
   deleteTask = 'deleteTask',
   deleteBoard = 'deleteBoard',
+  editBoard = 'editBoard',
   addTask = 'addTask',
   updateTask = 'updateTask',
 }
@@ -27,14 +28,38 @@ export const reduserData = (state: IData, action: IactionData) => {
 
     case reduserData_actionType.addColumn:
       const newColumn: IColumn = { name: "newColumn", tasks: [] };
-      if (state.boards && action.indexActiveBoard !== undefined)
+      if (state.boards && action.indexActiveBoard !== undefined) {
+        newColumn.name = `newColumn ${state.boards[action.indexActiveBoard].columns.length + 1}`;
         state.boards[action.indexActiveBoard].columns.push(newColumn);
+      }
 
       return { ...state };
 
     case reduserData_actionType.addBoard:
       if (state.boards && action.newBoard !== undefined)
         state.boards.push(action.newBoard);
+
+      return { ...state };
+
+    case reduserData_actionType.editBoard:
+      if (state.boards && action.newBoard !== undefined && action.indexActiveBoard !== undefined && state.boards[action.indexActiveBoard] !== undefined) {
+        console.log("oldBoard", state.boards[action.indexActiveBoard]);
+        console.log("newBoard", action.newBoard);
+
+        state.boards[action.indexActiveBoard].columns.forEach(oldColumn => {
+          if (action.newBoard !== undefined) {
+            const idIndenticColumn = action.newBoard.columns.findIndex(newColumn => {
+              return newColumn.name === oldColumn.name
+            });
+            console.log(idIndenticColumn);
+
+            if (idIndenticColumn >= 0)
+              action.newBoard.columns[idIndenticColumn] = oldColumn;
+          }
+        });
+
+        state.boards[action.indexActiveBoard] = { ...action.newBoard };
+      }
 
       return { ...state };
 
