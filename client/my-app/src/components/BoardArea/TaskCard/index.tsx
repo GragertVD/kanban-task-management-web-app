@@ -2,23 +2,17 @@ import { usePopup } from "../../UI/usePopup";
 import { TaskCardContainer } from "./style";
 import React from "react";
 import { TaskOpen } from '../TaskOpen/index';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { BoardsContext, TaskCardContext, TaskCardProvider } from "../../../Context/Context";
 import { reduserData_actionType } from "../../../Context/reduserData";
+import { EditTask } from "../EditTask";
 
 
 const TaskCard: React.FC = () => {
   const { dataTask } = useContext(TaskCardContext);
-  const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
-  const popupClose = () => {
-    // console.log(dataTask);
-    
-    dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
-  };
-
-  const popup = usePopup(popupClose);
-  const PopupWrapper = popup.PopupWrapper;
+  const [openCard, setOpenCard] = useState(false);
+  const [openEditTask, setOpenEditTask] = useState(false);
 
 
   let quantitySubtasksAll: number = 0;
@@ -33,7 +27,7 @@ const TaskCard: React.FC = () => {
 
   return (
     <>
-      <TaskCardContainer onClick={() => popup.popupOpen()}>
+      <TaskCardContainer onClick={() => setOpenCard(true)}>
         <h5>{dataTask.title}</h5>
         {   //Строка с учетом выполненых подзадач
           quantitySubtasksAll === 0 ?
@@ -42,9 +36,20 @@ const TaskCard: React.FC = () => {
             <p>{quantitySubtasksComlited} of {quantitySubtasksAll} substasks</p>
         }
       </TaskCardContainer>
-      <PopupWrapper>
-        <TaskOpen />
-      </PopupWrapper>
+      {
+        openCard
+          ?
+          <TaskOpen setOpenCard={setOpenCard} setOpenEditTask={setOpenEditTask}/>
+          :
+          <></>
+      }
+      {
+        openEditTask
+          ?
+          <EditTask setOpenEditTask={setOpenEditTask} />
+          :
+          <></>
+      }
     </>
   )
 }

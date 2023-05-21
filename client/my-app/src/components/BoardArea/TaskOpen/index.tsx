@@ -1,59 +1,87 @@
-import { Description, TaskOpenContainer, Title } from "./style";
+import { Background, Description, TaskOpenContainer, Title } from "./style";
 import iconMenu from "../../../img/icon-vertical-ellipsis.svg";
-import React from "react";
+import React, { Dispatch, SetStateAction, useRef, useState, useMemo } from "react";
 import { useContext, useEffect } from 'react';
 import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import SubtasksList from "../SubtasksList";
 import SelectStatus from "../../UI/SelectStatus";
-import useDropMenu, { IDropMenuItem } from "../../UI/DropMenu";
+import DropMenu, { IMenuItem } from "../../UI/DropMenu";
 import { reduserData_actionType } from "../../../Context/reduserData";
+import { useOutsideClick } from "../../../hooks/useOutsideClick";
+
+interface ITaskOpen {
+  setOpenCard: Dispatch<SetStateAction<boolean>>;
+  setOpenEditTask: Dispatch<SetStateAction<boolean>>;
+}
 
 
-export const TaskOpen: React.FC = () => {
+export const TaskOpen: React.FC<ITaskOpen> = ({ setOpenCard, setOpenEditTask }) => {
 
   const { dataTask } = useContext(TaskCardContext);
   const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
- 
+  //для изменения статуса и переноса в новый стобец при закрытии карточки
+  const actualTask = useRef(dataTask);
+  actualTask.current = dataTask;
+  useEffect(() => {
+    const oldStatus = dataTask.status;
+    return () => {
+      if (actualTask.current.status !== oldStatus)
+        dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: actualTask.current });
+    }
+  }, []);
+
+
+  const [showDropMenu, setshowDropMenu] = useState(false);
+
   //Создаем массив объектов для выпадающего списка.
-  const listDropMenu: IDropMenuItem | IDropMenuItem[] =
+  const listDropMenu: IMenuItem | IMenuItem[] =
     [
       {
         text: "Edit Task",
         action: () => {
-          console.log("Edit Task");
+          setOpenEditTask(true);
+          setOpenCard(false);
         }
       },
       {
         text: "Delete Task",
         action: () => {
-          console.log("Delete Task");
           dispatchData({ type: reduserData_actionType.deleteTask, indexActiveBoard: indexActiveBoard, task: dataTask });
         }
       },
     ];
 
-  const dropMenu = useDropMenu(listDropMenu);
-  const DropMenuWrapper = dropMenu.DropMenuWrapper;
+  const refTaskContainer = useRef(null);
+  useOutsideClick({ element: refTaskContainer, setStateOutsideClick: setOpenCard })
+
 
   return (
     <>
-      <TaskOpenContainer>
-        <Title>
-          <h3>{dataTask.title}</h3>
-          {/* <div style={{position:"relative"}}> */}
-          <img
-            onClick={dropMenu.DropMenuOpen}
-            src={iconMenu} alt="картинка" />
-          <DropMenuWrapper />
-          {/* </div> */}
-        </Title>
-        <Description>
-          {dataTask.description}
-        </Description>
-        <SubtasksList />
-        <SelectStatus />
-      </TaskOpenContainer>
+      <Background >
+        <TaskOpenContainer ref={refTaskContainer}>
+          <Title>
+            <h3>{dataTask.title}</h3>
+            <div style={{ position: "relative" }}>    {/*блок для  того, чтобы выпадающее меню появлялось рядом с кнопкой */}
+              <img
+                onClick={() => setshowDropMenu(!showDropMenu)}
+                src={iconMenu} alt="картинка" />
+              {
+                showDropMenu
+                  ?
+                  <DropMenu listItem={listDropMenu} close={setshowDropMenu} />
+                  :
+                  <></>
+              }
+            </div>
+          </Title>
+          <Description>
+            {dataTask.description}
+          </Description>
+          <SubtasksList />
+          <SelectStatus />
+        </TaskOpenContainer>
+      </Background >
     </>
   )
 }

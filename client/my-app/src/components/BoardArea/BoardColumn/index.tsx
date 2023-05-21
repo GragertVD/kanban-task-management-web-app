@@ -3,7 +3,6 @@ import TaskCard from '../TaskCard';
 import { BoardColumnContainer, ColumnTasksContainer } from './style';
 import { BoardsContext, TaskCardProvider } from "../../../Context/Context";
 import { useContext } from 'react';
-import TaskElContext from '../TaskElContext';
 
 
 interface IBoardColumn extends IColumn {
@@ -25,7 +24,7 @@ const BoardColumn: React.FC<IBoardColumn> = (props) => {
               ?
               column.tasks.map(
                 (dataTask, index) =>
-                  <TaskCardProvider key={dataTask.title} {...dataTask}>
+                  <TaskCardProvider key={dataTask.title + Math.random()*1000+index} {...dataTask}>
                     <TaskCard />
                   </TaskCardProvider>
               )

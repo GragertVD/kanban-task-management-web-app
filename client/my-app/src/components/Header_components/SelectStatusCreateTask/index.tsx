@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
 import { SelectStatusContainer } from "./style";
-import { BoardsContext, TaskCardContext } from "../../../Context/Context";
+import { BoardsContext } from "../../../Context/Context";
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { IBoard } from "../../../interface";
-import { reduserDataTask_actionType } from "../../../Context/reduserDataTask";
 
+interface ISelectStatusCreateTask{
+  selectStatus: string;
+  setSelectStatus: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const SelectStatus: React.FC = () => {
+const SelectStatusCreateTask: React.FC<ISelectStatusCreateTask> = ({selectStatus, setSelectStatus}) => {
 
-  const { dataTask, dispatchDataTask } = useContext(TaskCardContext);
-  const { dispatchData, data, indexActiveBoard } = useContext(BoardsContext);
+  const { data, indexActiveBoard } = useContext(BoardsContext);
 
-  const handleChange = (event: SelectChangeEvent) => {    
-    dispatchDataTask({ type: reduserDataTask_actionType.changeStatus, payload: event.target.value });
+  const handleChange = (event: SelectChangeEvent) => {
+    setSelectStatus(event.target.value);
   }
 
   if (data && data.boards && indexActiveBoard !== undefined) {
@@ -26,7 +28,7 @@ const SelectStatus: React.FC = () => {
           SelectDisplayProps={{ style: { height: "40px", boxSizing: "border-box", padding: "8px 16px" } }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={dataTask.status}
+          value={selectStatus}
           label="status"
           onChange={handleChange}
         >
@@ -48,4 +50,4 @@ const SelectStatus: React.FC = () => {
 
 }
 
-export default SelectStatus;
+export default SelectStatusCreateTask;

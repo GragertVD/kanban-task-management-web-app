@@ -21,7 +21,7 @@ const SubtasksList: React.FC = () => {
     <SubtasksContainer>
       {   //Строка с учетом выполненых подзадач
         quantitySubtasksAll === 0 ?
-          <p>0 substasks</p>
+          <></>
           :
           <p>{quantitySubtasksComlited} of {quantitySubtasksAll} substasks</p>
       }
@@ -37,7 +37,7 @@ const SubtasksList: React.FC = () => {
               id="ch1"
             />)
           :
-          <div>subtask missing</div>
+          <></>
       }
     </SubtasksContainer>
   )
