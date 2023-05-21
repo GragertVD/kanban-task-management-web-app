@@ -24,7 +24,7 @@ const BoardColumn: React.FC<IBoardColumn> = (props) => {
               ?
               column.tasks.map(
                 (dataTask, index) =>
-                  <TaskCardProvider key={dataTask.title} {...dataTask}>
+                  <TaskCardProvider key={dataTask.title + Math.random()*1000+index} {...dataTask}>
                     <TaskCard />
                   </TaskCardProvider>
               )

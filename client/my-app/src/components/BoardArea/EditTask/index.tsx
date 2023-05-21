@@ -1,48 +1,50 @@
 import { Background, InputDescriptionContainer, InputTitleContainer, NewTaskContainerForm, TitleNewTask } from "./style";
 import React, { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
 import { useContext } from 'react';
-import { BoardsContext } from "../../../Context/Context";
+import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { useInput } from "../../../hooks/useInput";
 import Button from "../../UI/Button";
-import CreateSubtasksList from "../CreateSubtasksList";
-import SelectStatusCreateTask from "../SelectStatusCreateTask";
 import { ITask, ISubtask } from '../../../interface';
 import { reduserData_actionType } from "../../../Context/reduserData";
+import CreateSubtasksList from "../../Header_components/CreateSubtasksList";
+import SelectStatusCreateTask from "../../Header_components/SelectStatusCreateTask";
+import { EditSubtasksList } from "../EditSubtasksList";
 
-interface ITaskOpen {
-  closeSetState: Dispatch<SetStateAction<boolean>>;
+interface IEditTask {
+  setOpenEditTask: Dispatch<SetStateAction<boolean>>;
 }
 
-export const AddNewtask: React.FC<ITaskOpen> = ({ closeSetState }) => {
+export const EditTask: React.FC<IEditTask> = ({ setOpenEditTask }) => {
 
-  //Получаем данные текущей доски
+  //Получаем данные текущей доски и карточки
   const { data, dispatchData, indexActiveBoard } = useContext(BoardsContext);
+  const { dataTask } = useContext(TaskCardContext);
 
   //вешаем закрытие на открытое окно
   const refTaskContainer = useRef(null);
-  useOutsideClick({ element: refTaskContainer, setStateOutsideClick: closeSetState });
+  useOutsideClick({ element: refTaskContainer, setStateOutsideClick: setOpenEditTask });
 
   //Состояние для заполнения новой задачи
-  const inputTitle = useInput('');
-  const inputDescription = useInput('');
-  const [selectStatus, setSelectStatus] = useState(data.boards ? data.boards[indexActiveBoard].columns[0].name : '');
-  const [subtaskListTitle, setSubtaskListTitle] = useState([""]);
+  const inputTitle = useInput(dataTask.title);
+  const inputDescription = useInput(dataTask.description ? dataTask.description : '');
+  const [selectStatus, setSelectStatus] = useState(dataTask.status);
+  const [subtaskList, setSubtaskList] = useState(dataTask.subtasks ? dataTask.subtasks : [{ title: "", isCompleted: false }]);
 
-  //При отправки формы создаем новую задачу, заполняем её и добавляем в доску
+
   const MySubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (inputTitle.value.length < 1) {
-      alert("Нельзя создать задачу без названия")
+      alert("У задачи должно быть название")
       return;
     }
 
-    // Создаем массив подзадач из списка названий подзадач
+    // Создаем массив подзадач исключая подзадачи без названия
     let tempSubtask: ISubtask[] = [];
-    subtaskListTitle.forEach(subtaskTitle => {
-      if (subtaskTitle.length > 0)
-        tempSubtask = tempSubtask.concat({ title: subtaskTitle, isCompleted: false });
+    subtaskList.forEach(subtask => {
+      if (subtask.title.length > 0)
+        tempSubtask = tempSubtask.concat(subtask);
     });
 
     const newTask: ITask = {
@@ -51,8 +53,10 @@ export const AddNewtask: React.FC<ITaskOpen> = ({ closeSetState }) => {
       description: inputDescription.value,
       subtasks: tempSubtask,
     }
+
+    dispatchData({ type: reduserData_actionType.deleteTask, task: dataTask, indexActiveBoard });
     dispatchData({ type: reduserData_actionType.addTask, task: newTask, indexActiveBoard });
-    closeSetState(false);
+    setOpenEditTask(false);
   }
 
   if (data.boards) {
@@ -60,7 +64,7 @@ export const AddNewtask: React.FC<ITaskOpen> = ({ closeSetState }) => {
       <>
         <Background >
           <NewTaskContainerForm ref={refTaskContainer} onSubmit={MySubmit}>
-            <TitleNewTask>Add New Task</TitleNewTask>
+            <TitleNewTask>Edit Task</TitleNewTask>
             <InputTitleContainer>
               <p>Title</p>
               <input {...inputTitle} placeholder="e.g. Take coffee break" type="text" />
@@ -69,9 +73,9 @@ export const AddNewtask: React.FC<ITaskOpen> = ({ closeSetState }) => {
               <p>Description</p>
               <textarea {...inputDescription} placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.k" />
             </InputDescriptionContainer>
-            <CreateSubtasksList subtaskListTitle={subtaskListTitle} setSubtaskListTitle={setSubtaskListTitle} />
+            <EditSubtasksList subtaskList={subtaskList} setSubtaskList={setSubtaskList} />
             <SelectStatusCreateTask selectStatus={selectStatus} setSelectStatus={setSelectStatus} />
-            <Button type="submit" width="100%" height="40px" text="Create Task" />
+            <Button type="submit" width="100%" height="40px" text="Save Changes" />
           </NewTaskContainerForm>
         </Background >
       </>

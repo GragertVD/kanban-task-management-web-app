@@ -12,7 +12,7 @@ const SelectStatus: React.FC = () => {
   const { dataTask, dispatchDataTask } = useContext(TaskCardContext);
   const { dispatchData, data, indexActiveBoard } = useContext(BoardsContext);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent) => {    
     dispatchDataTask({ type: reduserDataTask_actionType.changeStatus, payload: event.target.value });
   }
 

@@ -8,6 +8,7 @@ export enum reduserData_actionType {
   deleteTask = 'deleteTask',
   deleteBoard = 'deleteBoard',
   addTask = 'addTask',
+  updateTask = 'updateTask',
 }
 
 export interface IactionData {
@@ -38,7 +39,6 @@ export const reduserData = (state: IData, action: IactionData) => {
       return { ...state };
 
     case reduserData_actionType.addTask:
-      console.log("addTask");
       if (state.boards && action.indexActiveBoard !== undefined && action.task !== undefined){
         //функция вызывается дважды, поэотму сделал блокирую добавление двух задач с одинаковым именем, пока там, позже обдумаю надо ли вообще позволять создавать одинаковые задачи. навреное нет, потмоу что запарно реализовывать в данном учебном проекте, хотя функционал нужен. Надо подумать
         const columnId = state.boards[action.indexActiveBoard].columns.findIndex(
@@ -103,8 +103,9 @@ export const reduserData = (state: IData, action: IactionData) => {
       let columnPrevId: number = -1;
       let columnNewId: number = -1;
       let taskId: number = -1;
-
-      if (newData.boards && state.boards && action.indexActiveBoard !== undefined && action.task) {
+      
+      
+      if (newData.boards && state.boards && action.indexActiveBoard !== undefined && action.task !== undefined) {
         taskTitle = action.task.title;
         columnNewName = action.task.status;
 
@@ -133,8 +134,8 @@ export const reduserData = (state: IData, action: IactionData) => {
           return { ...newData };
         }
       }
-
-      return { ...state };
+      
+      return state;
 
     case reduserData_actionType.deleteBoard:
       // const newBoard: IBoard = { name: "new Board", columns: [] };

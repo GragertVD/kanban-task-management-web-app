@@ -5,17 +5,15 @@ import { TaskOpen } from '../TaskOpen/index';
 import { useContext, useState } from 'react';
 import { BoardsContext, TaskCardContext, TaskCardProvider } from "../../../Context/Context";
 import { reduserData_actionType } from "../../../Context/reduserData";
+import { EditTask } from "../EditTask";
 
 
 const TaskCard: React.FC = () => {
   const { dataTask } = useContext(TaskCardContext);
-  const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
-
-  const popupClose = () => {
-    dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
-  };
 
   const [openCard, setOpenCard] = useState(false);
+  const [openEditTask, setOpenEditTask] = useState(false);
+
 
   let quantitySubtasksAll: number = 0;
   let quantitySubtasksComlited: number = 0;
@@ -41,13 +39,17 @@ const TaskCard: React.FC = () => {
       {
         openCard
           ?
-          <TaskOpen close={setOpenCard}/>
+          <TaskOpen setOpenCard={setOpenCard} setOpenEditTask={setOpenEditTask}/>
           :
           <></>
       }
-      {/* <PopupWrapper>
-        <TaskOpen />
-      </PopupWrapper> */}
+      {
+        openEditTask
+          ?
+          <EditTask setOpenEditTask={setOpenEditTask} />
+          :
+          <></>
+      }
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { Background, Description, TaskOpenContainer, Title } from "./style";
 import iconMenu from "../../../img/icon-vertical-ellipsis.svg";
-import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import React, { Dispatch, SetStateAction, useRef, useState, useMemo } from "react";
 import { useContext, useEffect } from 'react';
 import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import SubtasksList from "../SubtasksList";
@@ -10,20 +10,29 @@ import { reduserData_actionType } from "../../../Context/reduserData";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface ITaskOpen {
-  close: Dispatch<SetStateAction<boolean>>;
+  setOpenCard: Dispatch<SetStateAction<boolean>>;
+  setOpenEditTask: Dispatch<SetStateAction<boolean>>;
 }
 
-export const TaskOpen: React.FC<ITaskOpen> = ({ close }) => {
+
+export const TaskOpen: React.FC<ITaskOpen> = ({ setOpenCard, setOpenEditTask }) => {
 
   const { dataTask } = useContext(TaskCardContext);
   const { dispatchData, indexActiveBoard } = useContext(BoardsContext);
 
+  //для изменения статуса и переноса в новый стобец при закрытии карточки
+  const actualTask = useRef(dataTask);
+  actualTask.current = dataTask;
   useEffect(() => {
+    const oldStatus = dataTask.status;
     return () => {
-      dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
+      if (actualTask.current.status !== oldStatus)
+        dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: actualTask.current });
     }
-  }, [dataTask]);
-  
+  }, []);
+
+
+  const [showDropMenu, setshowDropMenu] = useState(false);
 
   //Создаем массив объектов для выпадающего списка.
   const listDropMenu: IMenuItem | IMenuItem[] =
@@ -31,23 +40,21 @@ export const TaskOpen: React.FC<ITaskOpen> = ({ close }) => {
       {
         text: "Edit Task",
         action: () => {
-          console.log("Edit Task");
+          setOpenEditTask(true);
+          setOpenCard(false);
         }
       },
       {
         text: "Delete Task",
         action: () => {
-          console.log("Delete Task");
           dispatchData({ type: reduserData_actionType.deleteTask, indexActiveBoard: indexActiveBoard, task: dataTask });
         }
       },
     ];
 
-    
-    const refTaskContainer = useRef(null);
-    useOutsideClick({ element: refTaskContainer, setStateOutsideClick: close })
-    
-    const [showDropMenu, setshowDropMenu] = useState(false);
+  const refTaskContainer = useRef(null);
+  useOutsideClick({ element: refTaskContainer, setStateOutsideClick: setOpenCard })
+
 
   return (
     <>
