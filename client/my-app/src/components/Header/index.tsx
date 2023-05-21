@@ -8,6 +8,7 @@ import DropMenu, { IMenuItem } from '../UI/DropMenu';
 import { reduserData_actionType } from '../../Context/reduserData';
 import { AddNewtask } from '../Header_components/AddNewTask';
 import { StyledHeader } from './style';
+import { EditBoard } from '../Header_components/EditBoard';
 
 
 const Header = () => {
@@ -16,13 +17,16 @@ const Header = () => {
   // dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
 
   const [showDropMenu, setshowDropMenu] = useState(false);
+
+  const [openEditBoard, setOpenEditBoard] = useState(false);
+
   //Создаем массив объектов для выпадающего списка.
   const listDropMenu: IMenuItem | IMenuItem[] =
     [
       {
         text: "Edit Board",
         action: () => {
-          console.log("Edit Board");
+          setOpenEditBoard(true);
         }
       },
       {
@@ -30,14 +34,12 @@ const Header = () => {
         action: () => {
           dispatchData({ type: reduserData_actionType.deleteBoard, indexActiveBoard });
           setIndexActiveBoard(0);
-
         }
       },
     ];
 
 
   const [openNewCard, setOpenNewCard] = useState(false);
-
 
   return (
     <>
@@ -66,11 +68,17 @@ const Header = () => {
           </div>
         </div>
       </StyledHeader>
-
       {
         openNewCard
           ?
           <AddNewtask closeSetState={setOpenNewCard} />
+          :
+          <></>
+      }
+      {
+        openEditBoard
+          ?
+          <EditBoard closeSetState={setOpenEditBoard} />
           :
           <></>
       }

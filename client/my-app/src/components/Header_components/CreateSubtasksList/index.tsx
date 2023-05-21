@@ -7,9 +7,12 @@ import { SubtasksContainer, SubtasksListContainer } from './style';
 interface ICreateSubtasksList {
   subtaskListTitle: string[];
   setSubtaskListTitle: React.Dispatch<React.SetStateAction<string[]>>;
+  title?: string;
+  textBtn?: string;
+  placeholder?: string;
 }
 
-const CreateSubtasksList: React.FC<ICreateSubtasksList> = ({ subtaskListTitle, setSubtaskListTitle }) => {
+const CreateSubtasksList: React.FC<ICreateSubtasksList> = ({ subtaskListTitle, setSubtaskListTitle, title = "subtask", textBtn ="+ Add New Subtask" }) => {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const idSubtask = e.target.getAttribute("data-index");  //На input висит data атрибут с индексом соответствующему полозжению в массиве
@@ -37,7 +40,7 @@ const CreateSubtasksList: React.FC<ICreateSubtasksList> = ({ subtaskListTitle, s
 
   return (
     <SubtasksContainer>
-      <p>substasks</p>
+      <p>{title}</p>
       {
         subtaskListTitle.length > 0
           ?
@@ -63,7 +66,7 @@ const CreateSubtasksList: React.FC<ICreateSubtasksList> = ({ subtaskListTitle, s
         colorBG='#635FC71A'
         width="100%"
         height="40px"
-        text="+ Add New Subtask"
+        text={textBtn}
       />
     </SubtasksContainer>
   )

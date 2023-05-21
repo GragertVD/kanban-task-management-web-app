@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ReactComponent as IconBoard } from "../../../img/icon-board.svg";
 import { Item } from './style';
 import { reduserData_actionType } from '../../../Context/reduserData';
-import { BoardsContext } from '../../../Context/Context';
-import { useContext } from 'react';
+import { CreateBoard } from '../CreateBoard';
 
 
 function CreateItemBoard() {
-  const { dispatchData } = useContext(BoardsContext);
+  const [openCreateBoard, setOpenCreateBoard] = useState(false);
 
-  const addBoard = () => {
-    dispatchData({ type: reduserData_actionType.addBoard });
-  }
+  const addBoard = () => setOpenCreateBoard(true);
 
   return (
-    <Item onClick={addBoard}><IconBoard />+ Create New Board</Item>
+    <>
+      <Item onClick={addBoard}><IconBoard />+ Create New Board</Item>
+      {
+        openCreateBoard
+          ?
+          <CreateBoard closeSetState={setOpenCreateBoard} />
+          :
+          <></>
+      }
+    </>
   )
 }
 
