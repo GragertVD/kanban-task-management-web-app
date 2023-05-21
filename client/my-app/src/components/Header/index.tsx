@@ -12,7 +12,7 @@ import { StyledHeader } from './style';
 
 const Header = () => {
 
-  const { dispatchData, data, indexActiveBoard } = useContext(BoardsContext);
+  const { dispatchData, data, indexActiveBoard, setIndexActiveBoard } = useContext(BoardsContext);
   // dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
 
   const [showDropMenu, setshowDropMenu] = useState(false);
@@ -28,8 +28,9 @@ const Header = () => {
       {
         text: "Delete Board",
         action: () => {
-          console.log("Delete Board");
           dispatchData({ type: reduserData_actionType.deleteBoard, indexActiveBoard });
+          setIndexActiveBoard(0);
+
         }
       },
     ];
@@ -44,7 +45,7 @@ const Header = () => {
         <div>
           <Logo />
           {
-            data && (data.boards !== undefined && indexActiveBoard !== undefined)
+            data && (data.boards !== undefined && data.boards.length > 0 && indexActiveBoard !== undefined)
               ? <h1> {data.boards[indexActiveBoard].name}</h1>
               : <h1> Boards missing </h1>
           }

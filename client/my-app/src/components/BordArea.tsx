@@ -54,7 +54,7 @@ export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
   const { data, indexActiveBoard } = useContext(BoardsContext);
 
 
-  if (data && data.boards !== undefined && indexActiveBoard !== undefined) {
+  if (data && data.boards !== undefined && data.boards.length > 0 && indexActiveBoard !== undefined) {
     const activeBoard: IBoard = data.boards[indexActiveBoard];
     
     if (activeBoard.columns.length) {

@@ -138,9 +138,13 @@ export const reduserData = (state: IData, action: IactionData) => {
       return state;
 
     case reduserData_actionType.deleteBoard:
-      // const newBoard: IBoard = { name: "new Board", columns: [] };
+      console.log(state);
+      
       if (state.boards && action.indexActiveBoard !== undefined)
         state.boards.splice(action.indexActiveBoard, 1);
+
+      console.log(state);
+
 
       return { ...state };
 
