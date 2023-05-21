@@ -1,5 +1,5 @@
 import { Background, InputTitleContainer, NewTaskContainerForm, TitleNewTask } from "./style";
-import React, { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { useContext } from 'react';
 import { BoardsContext } from "../../../Context/Context";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
@@ -7,12 +7,18 @@ import { useInput } from "../../../hooks/useInput";
 import Button from "../../UI/Button";
 import { IBoard, IColumn } from '../../../interface';
 import CreateSubtasksList from "../CreateSubtasksList";
+import { reduserData_actionType } from "../../../Context/reduserData";
 
 interface IEditBoard {
   closeSetState: Dispatch<SetStateAction<boolean>>;
 }
 
 export const EditBoard: React.FC<IEditBoard> = ({ closeSetState }) => {
+
+  useEffect(() => {
+    alert("Будьте внимательны, при переименовании столбца с задачами, задачи будут удалены");
+  }, []);
+  
 
   //Получаем данные текущей доски и карточки
   const { data, dispatchData, indexActiveBoard } = useContext(BoardsContext);
@@ -50,7 +56,8 @@ export const EditBoard: React.FC<IEditBoard> = ({ closeSetState }) => {
       }
       console.log(newBoard);
 
-      // dispatchData({ type: reduserData_actionType.addTask, task: newTask, indexActiveBoard });
+      dispatchData({ type: reduserData_actionType.editBoard, indexActiveBoard, newBoard });
+      closeSetState(false);
     }
 
     return (

@@ -16,7 +16,7 @@ const BoardColumn: React.FC<IBoardColumn> = (props) => {
   if (data && data.boards !== undefined && indexActiveBoard !== undefined && props.index !== undefined) {
     const column: IColumn = data.boards[indexActiveBoard].columns[props.index];
     return (
-      <BoardColumnContainer>
+      <BoardColumnContainer draggable="true">
         <h4>{column.name} ({column.tasks.length})</h4>
         <ColumnTasksContainer>
           {
