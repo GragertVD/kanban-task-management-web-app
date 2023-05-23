@@ -8,7 +8,7 @@ import AddColumn from './BoardArea/AddColumn';
 
 
 const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', countColumn: number }>`
-  background-color: ${props => props.theme.colors.lightGrey};
+  background-color: ${props => props.theme.theme === "light" ? props.theme.colors.lightGrey : props.theme.colors.veryDarkGrey};
   /* height: 100%; */
   overflow: auto;
    &::-webkit-scrollbar-thumb {
@@ -38,6 +38,7 @@ const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', coun
   }
   width: 100vw;
   transition: all 0.3s;
+  transition: background-color 1s, color 1s;
   padding-top: 24px;
   padding-right: 24px;
   padding-left: ${props => props.StateShowSideBar === 'show' ? '324px' : '24px'};

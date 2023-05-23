@@ -5,14 +5,16 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { IBoard } from "../../../interface";
 import { reduserDataTask_actionType } from "../../../Context/reduserDataTask";
+import { ThemeContext } from "../../../App";
 
 
 const SelectStatus: React.FC = () => {
 
   const { dataTask, dispatchDataTask } = useContext(TaskCardContext);
   const { dispatchData, data, indexActiveBoard } = useContext(BoardsContext);
+  const { theme } = useContext(ThemeContext);
 
-  const handleChange = (event: SelectChangeEvent) => {    
+  const handleChange = (event: SelectChangeEvent) => {
     dispatchDataTask({ type: reduserDataTask_actionType.changeStatus, payload: event.target.value });
   }
 
@@ -23,7 +25,13 @@ const SelectStatus: React.FC = () => {
       <SelectStatusContainer>
         <p>Current Status</p>
         <Select
-          SelectDisplayProps={{ style: { height: "40px", boxSizing: "border-box", padding: "8px 16px" } }}
+          SelectDisplayProps={
+            theme === "light"
+              ?
+              { style: { height: "40px", boxSizing: "border-box", padding: "8px 16px", overflow: "initial" } }
+              :
+              { style: { height: "40px", boxSizing: "border-box", padding: "8px 16px", color: "white", border: "2px solid rgba(130, 143, 163, 0.25)", overflow: "initial" } }
+          }
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={dataTask.status}
@@ -33,12 +41,21 @@ const SelectStatus: React.FC = () => {
           {
             activeBoard.columns.length
               ?
-              activeBoard.columns.map((column, index) => <MenuItem key={index} value={column.name}>{column.name}</MenuItem>)
+              activeBoard.columns.map((column, index) => <MenuItem
+                key={index} value={column.name}
+                style={
+                  theme === "light"
+                    ?
+                    {paddingTop: "8px", marginTop: "-8px", paddingBottom: "8px", marginBottom: "-8px" }
+                    :
+                    { paddingTop: "8px", marginTop: "-8px", paddingBottom: "8px", marginBottom: "-8px", color: "white", backgroundColor: "#20212C" }
+                }
+              >{column.name}</MenuItem>)
               :
               <div>Error</div>
           }
         </Select>
-      </SelectStatusContainer>
+      </SelectStatusContainer >
     )
   } else {
     return (

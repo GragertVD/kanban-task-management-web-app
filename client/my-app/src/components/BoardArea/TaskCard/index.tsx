@@ -3,10 +3,9 @@ import { TaskCardContainer } from "./style";
 import React from "react";
 import { TaskOpen } from '../TaskOpen/index';
 import { useContext, useState } from 'react';
-import { BoardsContext, TaskCardContext, TaskCardProvider } from "../../../Context/Context";
-import { reduserData_actionType } from "../../../Context/reduserData";
+import { TaskCardContext } from "../../../Context/Context";
 import { EditTask } from "../EditTask";
-
+import { Ask } from "../../UI/Ask";
 
 const TaskCard: React.FC = () => {
   const { dataTask } = useContext(TaskCardContext);
@@ -24,10 +23,10 @@ const TaskCard: React.FC = () => {
     quantitySubtasksComlited = subtasksComlited.length;
   }
 
-
+  
   return (
     <>
-      <TaskCardContainer onClick={() => setOpenCard(true)}>
+      <TaskCardContainer onClick={() => { setOpenCard(true)}}>
         <h5>{dataTask.title}</h5>
         {   //Строка с учетом выполненых подзадач
           quantitySubtasksAll === 0 ?
@@ -39,7 +38,7 @@ const TaskCard: React.FC = () => {
       {
         openCard
           ?
-          <TaskOpen setOpenCard={setOpenCard} setOpenEditTask={setOpenEditTask}/>
+          <TaskOpen setOpenCard={setOpenCard} setOpenEditTask={setOpenEditTask} />
           :
           <></>
       }

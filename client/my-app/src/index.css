@@ -15,6 +15,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color 1s, color 1s;
 }
 
 code {
@@ -25,4 +26,8 @@ code {
 
 li{
   list-style-type: none;
+}
+
+.MuiPaper-root{
+  background-color: red;
 }

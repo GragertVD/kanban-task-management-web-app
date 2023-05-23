@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const NewTaskContainerForm = styled.form`
   width: 480px;
-  max-height: 85vh;
-  background-color: ${props => props.theme.colors.white};
+  max-height: 85vh;  
+  background-color: ${props => props.theme.theme === "light" ? props.theme.colors.white : props.theme.colors.darkGrey};
   border-radius: 5px;
   padding: 32px;
   
@@ -44,6 +44,7 @@ export const NewTaskContainerForm = styled.form`
 export const TitleNewTask = styled.h3`
   width: 100%;
   ${props => props.theme.fonts.heading_L};
+  color: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
 `;
 
 export const InputTitleContainer = styled.div`
@@ -55,7 +56,7 @@ export const InputTitleContainer = styled.div`
     font-size: 12px;
     line-height: 15px;
 
-    color: ${props => props.theme.colors.mediumGrey};
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.mediumGrey : props.theme.colors.white};
     margin-bottom: 8px;
   }
   
@@ -66,9 +67,10 @@ export const InputTitleContainer = styled.div`
     ${props => props.theme.fonts.body_L};
     border-radius: 4px;
     border: 1px solid rgba(130, 143, 163, 0.25);
-    color: ${props => props.theme.colors.black};
+    background-color: ${props => props.theme.theme === "light" ? props.theme.colors.white : props.theme.colors.darkGrey};
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
     &::placeholder{
-      color: rgba(00,01,12, 0.25);
+      color: ${props => props.theme.theme === "light" ? "rgba(00,01,12, 0.25)" : "rgba(ff,ff,ff, 0.25)"};
     }
     &:focus{
       outline: none;
@@ -86,7 +88,7 @@ export const InputDescriptionContainer = styled.div`
     font-size: 12px;
     line-height: 15px;
 
-    color: ${props => props.theme.colors.mediumGrey};
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.mediumGrey : props.theme.colors.white};
     margin-bottom: 8px;
   }
   
@@ -98,9 +100,10 @@ export const InputDescriptionContainer = styled.div`
     ${props => props.theme.fonts.body_L};
     border-radius: 4px;
     border: 1px solid rgba(130, 143, 163, 0.25);
-    color: ${props => props.theme.colors.black};
+    background-color: ${props => props.theme.theme === "light" ? props.theme.colors.white : props.theme.colors.darkGrey};
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
     &::placeholder{
-      color: rgba(00,01,12, 0.25);
+      color: ${props => props.theme.theme === "light" ? "rgba(00,01,12, 0.25)" : "rgba(ff,ff,ff, 0.25)"};
     }
 
     &:focus{
