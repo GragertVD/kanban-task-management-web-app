@@ -5,11 +5,11 @@ export const CheckboxContainer = styled.div`
 
   width: 100%;
   padding: 12px;
-  background-color: ${props => props.theme.colors.lightGrey};
+  background-color: ${props => props.theme.theme === "light" ? props.theme.colors.lightGrey : props.theme.colors.veryDarkGrey};
   border-radius: 4px;
   display: flex;
   align-items: center;
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
 
   &:has(input:hover){
     background-color: rgba(99, 95, 199, 0.25);
@@ -18,7 +18,7 @@ export const CheckboxContainer = styled.div`
 
   label{
     ${props => props.theme.fonts.body_M};
-    color: ${props => props.theme.colors.black};
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
     cursor: pointer;
 
     display: flex;

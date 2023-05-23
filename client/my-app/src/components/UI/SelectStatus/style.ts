@@ -8,9 +8,13 @@ export const SelectStatusContainer = styled.div`
   
   p{
     ${props => props.theme.fonts.body_M};
-    color: ${props => props.theme.colors.mediumGrey};
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.mediumGrey : props.theme.colors.white};
     margin-bottom: 8px;
   }
 
+  svg{
+    fill: ${props => props.theme.colors.mainPurple};
+  }
 `;
+
 

@@ -23,7 +23,7 @@ const SubtasksList: React.FC = () => {
         quantitySubtasksAll === 0 ?
           <></>
           :
-          <p>{quantitySubtasksComlited} of {quantitySubtasksAll} substasks</p>
+          <p>Substasks ({quantitySubtasksComlited} of {quantitySubtasksAll})</p>
       }
       {   //чеклист с подзадачами
         dataTask.subtasks !== undefined

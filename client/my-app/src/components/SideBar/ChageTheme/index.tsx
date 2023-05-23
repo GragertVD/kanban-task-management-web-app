@@ -3,10 +3,12 @@ import { ReactComponent as IconDarkTheme } from "../../../img/icon-dark-theme.sv
 import { ReactComponent as IconLightTheme } from "../../../img/icon-light-theme.svg";
 import Toggle from '../../UI/Toggle';
 import { ChangeThemeContainer } from './style';
+import { useContext } from 'react';
+import { ThemeContext } from '../../../App';
 
 
 const ChageTheme: React.FC = () => {
-  const [theme, setTheme] = useState('light');
+  const { theme, setTheme } = useContext(ThemeContext);
 
   return (
     <ChangeThemeContainer>

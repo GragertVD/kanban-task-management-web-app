@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const TaskOpenContainer = styled.div`
   width: 480px;
-  background-color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.theme === "light" ? props.theme.colors.white : props.theme.colors.darkGrey};
   border-radius: 5px;
   padding: 32px;
 
@@ -20,6 +20,7 @@ export const Title = styled.div`
   justify-content: space-between;
   h3{
     ${props => props.theme.fonts.heading_L};
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
     margin-right: 24px;
   }
   img{

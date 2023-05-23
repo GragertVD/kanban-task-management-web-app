@@ -9,6 +9,7 @@ export const SubtasksContainer = styled.div`
   gap: 8px;
   
   p{
+    color: ${props => props.theme.theme === "light" ? props.theme.colors.mediumGrey : props.theme.colors.white};
     margin-bottom: 8px;
   }
 `;
