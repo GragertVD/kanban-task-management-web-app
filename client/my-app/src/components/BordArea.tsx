@@ -37,8 +37,8 @@ const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', coun
     scrollbar-width: thin;
   }
   width: 100vw;
-  transition: all 0.3s;
-  transition: background-color 1s, color 1s;
+  transition: background-color 1s, color 1s, padding 0.3s;
+
   padding-top: 24px;
   padding-right: 24px;
   padding-left: ${props => props.StateShowSideBar === 'show' ? '324px' : '24px'};

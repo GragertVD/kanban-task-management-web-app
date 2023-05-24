@@ -68,6 +68,22 @@ export const lightTheme = {
     },
   },
 
+  fromMobileS: "@media (min-width: 320px)",
+  fromMobileM: "@media (min-width: 375px)",
+  fromMobileL: "@media (min-width: 425px)",
+  fromTablet: "@media (min-width: 768px)",
+  fromLaptop: "@media (min-width: 1024px)",
+  fromLaptopL: "@media (min-width: 1440px)",
+  fromDesktop: "@media (min-width: 2560px)",
+
+
+  beforeMobileS: "@media (max-width: 320px)",
+  beforeMobileM: "@media (max-width: 375px)",
+  beforeMobileL: "@media (max-width: 425px)",
+  beforeTablet: "@media (max-width: 768px)",
+  beforeLaptop: "@media (max-width: 1024px)",
+  beforeLaptopL: "@media (max-width: 1440px)",
+  beforeDesktop: "@media (max-width: 2560px)",
 };
 
 export const darkTheme = {
@@ -141,4 +157,20 @@ export const darkTheme = {
     },
   },
 
+  fromMobileS: "@media (min-width: 320px)",
+  fromMobileM: "@media (min-width: 375px)",
+  fromMobileL: "@media (min-width: 425px)",
+  fromTablet: "@media (min-width: 768px)",
+  fromLaptop: "@media (min-width: 1024px)",
+  fromLaptopL: "@media (min-width: 1440px)",
+  fromDesktop: "@media (min-width: 2560px)",
+
+
+  beforeMobileS: "@media (max-width: 320px)",
+  beforeMobileM: "@media (max-width: 375px)",
+  beforeMobileL: "@media (max-width: 425px)",
+  beforeTablet: "@media (max-width: 768px)",
+  beforeLaptop: "@media (max-width: 1024px)",
+  beforeLaptopL: "@media (max-width: 1440px)",
+  beforeDesktop: "@media (max-width: 2560px)",
 };
