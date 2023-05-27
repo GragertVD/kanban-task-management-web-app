@@ -5,6 +5,7 @@ import { BoardsProvider } from './Context/Context';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './them';
 import React, { Dispatch, SetStateAction, useState } from 'react';
+import { useResize } from './hooks/useResize';
 
 
 const AppContainer = styled.div`
@@ -24,9 +25,10 @@ interface IContextTheme {
 export const ThemeContext = React.createContext<IContextTheme>({ theme: "light", setTheme: () => { } });
 
 function App() {
+  const widthWindow = useResize();
 
   const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [StateShowSideBar, setStateShowSideBar] = useState<'show' | 'hiden'>('show');
+  const [StateShowSideBar, setStateShowSideBar] = useState<'show' | 'hiden'>(!widthWindow.isScreenMobileL ? 'hiden' : 'show');
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
