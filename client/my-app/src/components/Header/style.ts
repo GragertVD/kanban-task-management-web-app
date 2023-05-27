@@ -75,7 +75,7 @@ export const StyledHeader = styled.div`
   ${props => props.theme.beforeMobileL}{
     height: 64px;
     padding: 5px;
-    padding-right: 10px;
+    padding-right: 15px;
     
     div:not(:last-child){
       gap: 5px;

@@ -9,10 +9,12 @@ export const TaskCardContainer = styled.div`
   cursor: pointer;
   transition: background-color 1s, color 1s, transform 0.3s;
   
-  &:hover{
-    transform: scale(1.03);
+  @media (any-hover: hover) {
+    &:hover{
+      transform: scale(1.03);
+    }
   }
-  
+
   h5{
     transition: background-color 1s, color 1s;
     ${props => props.theme.fonts.heading_M};
