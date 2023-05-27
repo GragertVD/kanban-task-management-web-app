@@ -46,6 +46,7 @@ export const Header: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, se
   return (
     <>
       <StyledHeader>
+        {/* При нажатии на названия доски или логотип скрывается/показывается меню с досками, в основном надо на мобилках, но оставил и на больших экранах */}
         <div onClick={() => { setStateShowSideBar(StateShowSideBar === "hiden" ? "show" : "hiden") }}>
           <Logo />
           {
@@ -55,15 +56,12 @@ export const Header: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, se
           }
         </div>
         <div>
-          {
-            !widthWindow.isScreenMobileM
-              ?
-              <Button onClick={() => { setOpenNewCard(true) }} text="+" height='32px' />
-              :
-              <Button onClick={() => { setOpenNewCard(true) }} text="+ Add new task" />
-
-          }
-          <div style={{ position: "relative" }}>    {/*блок для  того, чтобы выпадающее меню появлялось рядом с кнопкой */}
+          <Button
+            onClick={() => { setOpenNewCard(true) }}
+            text={widthWindow.isScreenMobileM ? "+ Add new task" : "+"}
+            height={widthWindow.isScreenMobileM ? "48px" : "32px"}
+          />
+          <div style={{ position: "relative" }} onClick={() => setshowDropMenu(!showDropMenu)}>    {/*блок для  того, чтобы выпадающее меню появлялось рядом с кнопкой */}
             <img
               onClick={() => setshowDropMenu(!showDropMenu)}
               src={iconMenu} alt="картинка" />

@@ -11,9 +11,10 @@ export const CheckboxContainer = styled.div`
   align-items: center;
   color: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
 
-  &:has(input:hover){
-    background-color: rgba(99, 95, 199, 0.25);
-    /* background-color: rgba(${props => props.theme.colors.mainPurple}, 0.25); */
+  @media (any-hover: hover) {
+    &:has(input:hover){
+      background-color: rgba(99, 95, 199, 0.25);
+    }
   }
 
   label{
