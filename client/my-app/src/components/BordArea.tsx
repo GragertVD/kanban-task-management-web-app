@@ -47,20 +47,25 @@ const BoardAreaContainer = styled.div<{ StateShowSideBar: 'show' | 'hiden', coun
   display: grid;
   grid-template-columns: ${props => `repeat(${props.countColumn}, minmax(250px, 300px))`};
   grid-gap: 24px;
+
+  ${props => props.theme.beforeMobileL}{
+    padding-left: 24px;
+    pointer-events: ${props => props.StateShowSideBar === 'show' ? 'none' : 'all'};
+  }
 `;
 
 
-export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
+export const BordArea: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, setStateShowSideBar }) => {
 
   const { data, indexActiveBoard } = useContext(BoardsContext);
 
 
   if (data && data.boards !== undefined && data.boards.length > 0 && indexActiveBoard !== undefined) {
     const activeBoard: IBoard = data.boards[indexActiveBoard];
-    
+
     if (activeBoard.columns.length) {
       return (
-        <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={activeBoard.columns.length + 1}>
+        <BoardAreaContainer StateShowSideBar={StateShowSideBar} countColumn={activeBoard.columns.length + 1}>
           {
             activeBoard.columns.map((dataColumn, index) => <BoardColumn key={index} index={index} {...dataColumn} />)
           }
@@ -69,7 +74,7 @@ export const BordArea: React.FC<IPropsToggleShowSideBar> = (props) => {
       )
     } else {
       return (
-        <BoardAreaContainer StateShowSideBar={props.StateShowSideBar.StateShowSideBar} countColumn={0}>
+        <BoardAreaContainer StateShowSideBar={StateShowSideBar} countColumn={0}>
           <BoardEmpty />
         </BoardAreaContainer>
       )

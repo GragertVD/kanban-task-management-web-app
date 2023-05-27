@@ -20,4 +20,8 @@ export const StyledButton = styled.button<{ colorBG?: string, color?: string, he
       filter: grayscale(${props => props.colorBG? "1" : "0"});
     }
   }
+
+  ${props => props.theme.beforeMobileM}{
+    padding: 14px 18px;
+  }
 `

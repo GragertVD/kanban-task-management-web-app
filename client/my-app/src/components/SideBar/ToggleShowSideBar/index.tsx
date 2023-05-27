@@ -5,15 +5,15 @@ import { IPropsToggleShowSideBar } from '../../../interface';
 import { Item, ItemHiden } from './style';
 
 
-export const ToggleShowSideBar: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar }) => {
+export const ToggleShowSideBar: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, setStateShowSideBar }) => {
 
   const ToggleVisibleSideBar = () => {
-    StateShowSideBar.StateShowSideBar === 'show'
-      ? StateShowSideBar.setStateShowSideBar('hiden')
-      : StateShowSideBar.setStateShowSideBar('show');
+    StateShowSideBar === 'show'
+      ? setStateShowSideBar('hiden')
+      : setStateShowSideBar('show');
   };
 
-  if (StateShowSideBar.StateShowSideBar === 'show') {
+  if (StateShowSideBar === 'show') {
     return (
       <Item
         onClick={ToggleVisibleSideBar}
@@ -21,7 +21,7 @@ export const ToggleShowSideBar: React.FC<IPropsToggleShowSideBar> = ({ StateShow
         <IconHiden />Hide Sidebar
       </Item>
     )
-  } else if (StateShowSideBar.StateShowSideBar === 'hiden') {
+  } else if (StateShowSideBar === 'hiden') {
     return (
       <ItemHiden
         onClick={ToggleVisibleSideBar}

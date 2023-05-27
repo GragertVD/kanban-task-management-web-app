@@ -3,6 +3,7 @@ import ChageTheme from './ChageTheme'
 import { ToggleShowSideBar } from './ToggleShowSideBar'
 import styled from 'styled-components'
 import { IPropsToggleShowSideBar } from '../../interface';
+import { useResize } from '../../hooks/useResize';
 
 const BottomSideBarContainer = styled.div`
   display: flex;
@@ -11,11 +12,20 @@ const BottomSideBarContainer = styled.div`
 `;
 
 
-const BottomSideBar: React.FC<IPropsToggleShowSideBar> = (props) => {
+const BottomSideBar: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, setStateShowSideBar }) => {
+
+  const widthWindow = useResize();
+
   return (
     <BottomSideBarContainer>
       <ChageTheme />
-      <ToggleShowSideBar StateShowSideBar={props.StateShowSideBar} />
+      {
+        widthWindow.isScreenMobileL
+          ?
+          <ToggleShowSideBar {...{ StateShowSideBar, setStateShowSideBar }} />
+          :
+          <></>
+      }
     </BottomSideBarContainer>
   )
 }

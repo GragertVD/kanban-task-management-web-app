@@ -11,6 +11,10 @@ const LogoContainer = styled.div`
       fill: ${props => props.theme.theme === "light" ? props.theme.colors.black : props.theme.colors.white};
     }
   }
+  ${props => props.theme.beforeMobileM}{
+    border-right: none;
+  }
+
 `;
 
 const Logo: React.FC = () => {

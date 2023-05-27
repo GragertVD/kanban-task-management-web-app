@@ -10,7 +10,11 @@ export const TaskOpenContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  /* transition: all 0.3s; */
+
+  max-width: 90%;
+  ${props => props.theme.beforeMobileL}{
+    padding: 18px;
+  }
 `;
 
 export const Title = styled.div`
