@@ -102,6 +102,10 @@ export const StyledHeader = styled.div`
 `;
 
 export const BoardTitle = styled.h1<{ StateShowSideBar: 'show' | 'hiden' }>`
+
+  max-width: 40vw;
+  overflow: hidden;
+
   ${props => props.theme.beforeMobileL}{
     display: flex;
     align-items: center;
