@@ -1,4 +1,4 @@
-import Header from './components/Header';
+import { Header } from './components/Header';
 import styled from 'styled-components';
 import { Board } from './components/Board';
 import { BoardsProvider } from './Context/Context';
@@ -26,14 +26,15 @@ export const ThemeContext = React.createContext<IContextTheme>({ theme: "light",
 function App() {
 
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [StateShowSideBar, setStateShowSideBar] = useState<'show' | 'hiden'>('show');
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <BoardsProvider>
           <AppContainer className="App">
-            <Header />
-            <Board />
+            <Header StateShowSideBar={StateShowSideBar} setStateShowSideBar={setStateShowSideBar} />
+            <Board {...{ StateShowSideBar, setStateShowSideBar }} />
           </AppContainer>
         </BoardsProvider>
       </ThemeProvider>

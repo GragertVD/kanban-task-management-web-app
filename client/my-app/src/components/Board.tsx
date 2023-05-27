@@ -2,23 +2,24 @@ import React, { useState } from 'react'
 import { BordArea } from './BordArea';
 import SideBar from './SideBar';
 import styled from 'styled-components';
+import { IPropsToggleShowSideBar } from '../interface';
 
-const BoardContainer = styled.div(props => ({
-  display: 'flex',
-  minHeight: '100%',
+const BoardContainer = styled.div`
+  display: flex;
+  min-height: 100%;
 
-  position: 'relative',
-  transition: 'all 0.3s',
-}));
+  position: relative;
+  transition: all 0.3s;
+`;
 
-export const Board: React.FC = () => {
+export const Board: React.FC<IPropsToggleShowSideBar> = ({StateShowSideBar, setStateShowSideBar}) => {
 
-  const [StateShowSideBar, setStateShowSideBar] = useState<'show' | 'hiden'>('show');
+  // const [StateShowSideBar, setStateShowSideBar] = useState<'show' | 'hiden'>('show');
 
   return (
     <BoardContainer>
-      <SideBar StateShowSideBar={{ StateShowSideBar, setStateShowSideBar }} />
-      <BordArea StateShowSideBar={{ StateShowSideBar, setStateShowSideBar }} />
+      <SideBar {...{ StateShowSideBar, setStateShowSideBar }} />
+      <BordArea {...{ StateShowSideBar, setStateShowSideBar }} />
     </BoardContainer>
   )
 }

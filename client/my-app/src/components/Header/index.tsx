@@ -7,18 +7,20 @@ import { BoardsContext } from '../../Context/Context';
 import DropMenu, { IMenuItem } from '../UI/DropMenu';
 import { reduserData_actionType } from '../../Context/reduserData';
 import { AddNewtask } from '../Header_components/AddNewTask';
-import { StyledHeader } from './style';
+import { BoardTitle, StyledHeader } from './style';
 import { EditBoard } from '../Header_components/EditBoard';
+import { useResize } from '../../hooks/useResize';
+import { IPropsToggleShowSideBar } from '../../interface';
 
 
-const Header = () => {
+export const Header: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, setStateShowSideBar }) => {
 
   const { dispatchData, data, indexActiveBoard, setIndexActiveBoard } = useContext(BoardsContext);
-  // dispatchData({ type: reduserData_actionType.taskChangeStatus, indexActiveBoard, task: dataTask });
 
   const [showDropMenu, setshowDropMenu] = useState(false);
-
   const [openEditBoard, setOpenEditBoard] = useState(false);
+
+  const widthWindow = useResize();
 
   //Создаем массив объектов для выпадающего списка.
   const listDropMenu: IMenuItem | IMenuItem[] =
@@ -38,22 +40,29 @@ const Header = () => {
       },
     ];
 
-
+  // s
   const [openNewCard, setOpenNewCard] = useState(false);
 
   return (
     <>
       <StyledHeader>
-        <div>
+        <div onClick={() => { setStateShowSideBar(StateShowSideBar === "hiden" ? "show" : "hiden") }}>
           <Logo />
           {
             data && (data.boards !== undefined && data.boards.length > 0 && indexActiveBoard !== undefined)
-              ? <h1> {data.boards[indexActiveBoard].name}</h1>
-              : <h1> Boards missing </h1>
+              ? <BoardTitle StateShowSideBar={StateShowSideBar}> {data.boards[indexActiveBoard].name}</BoardTitle>
+              : <BoardTitle StateShowSideBar={StateShowSideBar}> Boards missing </BoardTitle>
           }
         </div>
         <div>
-          <Button onClick={() => { setOpenNewCard(true) }} text="+ Add new task" />
+          {
+            !widthWindow.isScreenMobileM
+              ?
+              <Button onClick={() => { setOpenNewCard(true) }} text="+" height='32px' />
+              :
+              <Button onClick={() => { setOpenNewCard(true) }} text="+ Add new task" />
+
+          }
           <div style={{ position: "relative" }}>    {/*блок для  того, чтобы выпадающее меню появлялось рядом с кнопкой */}
             <img
               onClick={() => setshowDropMenu(!showDropMenu)}
@@ -68,6 +77,7 @@ const Header = () => {
           </div>
         </div>
       </StyledHeader>
+      {/* Popup для создания новой задачи */}
       {
         openNewCard
           ?
@@ -75,6 +85,7 @@ const Header = () => {
           :
           <></>
       }
+      {/* Popup для редактирования доски */}
       {
         openEditBoard
           ?
@@ -86,5 +97,3 @@ const Header = () => {
 
   )
 }
-
-export default Header;

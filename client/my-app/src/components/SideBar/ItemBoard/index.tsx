@@ -15,7 +15,6 @@ const ItemBoard: React.FC<IPropsItemBoard> = (props) => {
 
   const { setIndexActiveBoard } = useContext(BoardsContext);
 
-
   return (
     <Item className={`${props.active ? 'active' : ''}`}
       onClick={

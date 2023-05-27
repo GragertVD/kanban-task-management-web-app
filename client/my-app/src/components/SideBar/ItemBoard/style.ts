@@ -3,9 +3,10 @@ import styled from 'styled-components'
 export const Item = styled.div`
   color: ${props => props.theme.colors.mediumGrey};
   background: transperty;
-
+  overflow: hidden;
   transition: all 0.15s;
 
+  
   &.active{
     background-color: ${props => props.theme.colors.mainPurple};
     color: ${props => props.theme.colors.white};
@@ -14,7 +15,6 @@ export const Item = styled.div`
     }
   }
   @media (any-hover: hover) {
-
     &:hover{
       background-color: rgba(99, 95, 199 , 0.1);
       color: ${props => props.theme.colors.mainPurple};
@@ -48,6 +48,7 @@ export const Item = styled.div`
   display: flex;
   align-items: center;
   svg{
+    flex-shrink: 0;
     margin-right: 16px;
   }
 `;

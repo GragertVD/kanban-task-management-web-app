@@ -39,6 +39,11 @@ export const NewTaskContainerForm = styled.form`
     scrollbar-color: ${props => props.theme.colors.mainPurpleHover} ${props => props.theme.colors.mediumGrey};
     scrollbar-width: thin;
   }
+    
+  max-width: 90%;
+  ${props => props.theme.beforeMobileL}{
+    padding: 18px;
+  }
 `;
 
 export const TitleNewTask = styled.h3`

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.439b353d.css",
-    "main.js": "/static/js/main.05bc9d1b.js",
+    "main.css": "/static/css/main.5f2bcdae.css",
+    "main.js": "/static/js/main.d771ddac.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/logo-dark.svg": "/static/media/logo-dark.ac4c8e487da046e58b1d44d8797a975e.svg",
     "static/media/icon-light-theme.svg": "/static/media/icon-light-theme.b98efecd506358014a7ae1eadb34e36c.svg",
@@ -13,12 +13,13 @@
     "static/media/icon-vertical-ellipsis.svg": "/static/media/icon-vertical-ellipsis.5c8996197d4a9dd7a7adfa20ce4abef9.svg",
     "static/media/icon-cross.svg": "/static/media/icon-cross.d4ca9e0d2a82f7ea4ae08238a42f84ed.svg",
     "static/media/icon-check.svg": "/static/media/icon-check.4e068cb6e6e3395eda40ccf42917b447.svg",
-    "main.439b353d.css.map": "/static/css/main.439b353d.css.map",
-    "main.05bc9d1b.js.map": "/static/js/main.05bc9d1b.js.map",
+    "static/media/icon-chevron-up.svg": "/static/media/icon-chevron-up.6918f905519d47589a92103b48580f45.svg",
+    "main.5f2bcdae.css.map": "/static/css/main.5f2bcdae.css.map",
+    "main.d771ddac.js.map": "/static/js/main.d771ddac.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.439b353d.css",
-    "static/js/main.05bc9d1b.js"
+    "static/css/main.5f2bcdae.css",
+    "static/js/main.d771ddac.js"
   ]
 }

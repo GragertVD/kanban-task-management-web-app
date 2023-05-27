@@ -12,7 +12,7 @@ interface IPropsButton {
   type?: "button" | "submit" | "reset" | undefined;
 }
 
-const Button: React.FC<IPropsButton> = ({ colorBG, text, onClick, height = "48", width, color, type = "button" }) =>
+const Button: React.FC<IPropsButton> = ({ colorBG, text, onClick, height = "48px", width, color, type = "button" }) =>
   <StyledButton type={type} onClick={onClick} colorBG={colorBG} color={color} height={height} width={width}>{text}</StyledButton>
 
 export default Button;

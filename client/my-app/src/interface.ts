@@ -1,8 +1,8 @@
 export interface IPropsToggleShowSideBar {
-  StateShowSideBar: {
+  // StateShowSideBar: {
     StateShowSideBar: 'show' | 'hiden';
     setStateShowSideBar: (state: 'show' | 'hiden') => void;
-  };
+  // };
 }
 
 export interface IData {
