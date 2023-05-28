@@ -1,4 +1,4 @@
-# Frontend Mentor - Kanban task management web app
+# Kanban task management web app
 
 ## Welcome! 👋
 ## Table of contents
@@ -11,7 +11,7 @@
 
 ## Overview
 
-### Expected Behaviour
+### The challenge
 
 - Boards
   - Clicking different boards in the sidebar will change to the selected board.
@@ -29,8 +29,7 @@
 
 ### Screenshot
 
-<!-- ![](https://github.com/GragertVD/password-generator-app/blob/master/screenshot.JPG) -->
-
+![](https://github.com/GragertVD/kanban-task-management-web-app/blob/master/screenshot.JPG)
 
 ### Links
 
