@@ -16,10 +16,16 @@ export const ItemBoard: React.FC<IPropsItemBoard> = (props) => {
   const { setIndexActiveBoard } = useContext(BoardsContext);
 
   return (
-    <Item className={`${props.active ? 'active' : ''}`}
+    <Item role="button" tabIndex={0} className={`${props.active ? 'active' : ''}`}
       onClick={
-        (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number = props.index) =>
+        (e: React.MouseEvent<HTMLLIElement, MouseEvent>, index: number = props.index) =>
           setIndexActiveBoard(index)
+      }
+      onKeyDown={
+        (e: React.KeyboardEvent<HTMLLIElement>, index: number = props.index) =>{
+          if(e.key == "Enter")
+            setIndexActiveBoard(index)
+        }
       }
     ><IconBoard />{props.nameBoard}</Item>
   )

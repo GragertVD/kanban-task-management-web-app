@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import IconArrow from "../../img/icon-chevron-up.svg";
 
-export const StyledHeader = styled.div`
+export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;

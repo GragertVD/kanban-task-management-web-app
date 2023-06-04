@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-export const ListBoardContainer = styled.div`
+export const ListBoardContainer = styled.ul`
 
   overflow-y: auto;
    &::-webkit-scrollbar-thumb {

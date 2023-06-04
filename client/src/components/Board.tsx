@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import styled from 'styled-components';
 import { IPropsToggleShowSideBar } from '../interface';
 
-const BoardContainer = styled.div`
+const BoardContainer = styled.main`
   display: flex;
   min-height: 100%;
 

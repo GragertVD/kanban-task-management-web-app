@@ -11,9 +11,11 @@ export const AddColumnContainer = styled.div`
   justify-content: center;
   transition: background-color 1s, color 1s;
 
-  p{
+  button{
     ${props => props.theme.fonts.heading_XL};
     color: ${props => props.theme.colors.mediumGrey}; 
+    border: none;
+    background: transparent;
     width: 100%;
     text-align: center;
     padding: 100% 0;
