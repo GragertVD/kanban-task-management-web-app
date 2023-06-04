@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { IPropsToggle } from '.';
 
-export const ToggleStyl = styled.div<IPropsToggle>`
+export const ToggleStyl = styled.button<IPropsToggle>`
+  border: none;
   width: 40px;
   height: 20px;
   background: ${props => props.theme.colors.mainPurple};

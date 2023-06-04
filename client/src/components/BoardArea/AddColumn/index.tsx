@@ -14,7 +14,7 @@ const AddColumn: React.FC = () => {
 
   return (
     <AddColumnContainer>
-      <p onClick={addColumn}>+ New Column</p>
+      <button onClick={addColumn}>+ New Column</button>
     </AddColumnContainer>
   )
 }

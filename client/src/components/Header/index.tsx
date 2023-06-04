@@ -40,7 +40,7 @@ export const Header: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, se
       },
     ];
 
-  
+
   const [openNewCard, setOpenNewCard] = useState(false);
 
   return (
@@ -61,10 +61,13 @@ export const Header: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, se
             text={widthWindow.isScreenMobileM ? "+ Add new task" : "+"}
             height={widthWindow.isScreenMobileM ? "48px" : "32px"}
           />
-          <div style={{ position: "relative" }} onClick={() => setshowDropMenu(!showDropMenu)}>    {/*блок для  того, чтобы выпадающее меню появлялось рядом с кнопкой */}
+          <button
+            aria-label='settings'
+            style={{ position: "relative", background: "none", border: "none", cursor: "pointer" }}
+            onClick={() => setshowDropMenu(!showDropMenu)}>    {/*блок для  того, чтобы выпадающее меню появлялось рядом с кнопкой */}
             <img
               onClick={() => setshowDropMenu(!showDropMenu)}
-              src={iconMenu} alt="картинка" />
+              src={iconMenu} alt="settings" />
             {
               showDropMenu
                 ?
@@ -72,7 +75,7 @@ export const Header: React.FC<IPropsToggleShowSideBar> = ({ StateShowSideBar, se
                 :
                 <></>
             }
-          </div>
+          </button>
         </div>
       </StyledHeader>
       {/* Popup для создания новой задачи */}

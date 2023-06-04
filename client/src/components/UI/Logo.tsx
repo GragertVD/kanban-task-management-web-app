@@ -19,7 +19,7 @@ const LogoContainer = styled.div`
 
 const Logo: React.FC = () => {
   return (
-    <LogoContainer>
+    <LogoContainer aria-label="Приложение канбан доски">
       <LogoKanban />
     </LogoContainer>
   )

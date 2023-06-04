@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 
 
-export const Item = styled.div`
+export const Item = styled.button`
+  border: none;
   color: ${props => props.theme.colors.mediumGrey};
-  background: transperty;
+  background-color: rgba(99, 95, 199 , 0);
+
   transition: all 0.15s;
 
   @media (any-hover: hover) {
@@ -40,7 +42,8 @@ export const Item = styled.div`
   }
 `;
 
-export const ItemHiden = styled.div`
+export const ItemHiden = styled.button`
+  border: none;
   background: ${props => props.theme.colors.mainPurple};
   transition: all 0.15s;
   

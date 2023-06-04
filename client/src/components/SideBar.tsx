@@ -5,7 +5,7 @@ import BottomSideBar from './SideBar/BottomSideBar';
 import { IPropsToggleShowSideBar } from '../interface';
 
 
-const SideBarContainer = styled.div<{ stateShowSideBar: 'show' | 'hiden' }>`
+const SideBarContainer = styled.aside<{ stateShowSideBar: 'show' | 'hiden' }>`
   transition: background-color 1s, color 1s, top 0.5s, left 0.3s, right 0.3s, box-shadow 1.2s;
 
   left: ${props => props.stateShowSideBar === 'show' ? '0px' : '-300px'};

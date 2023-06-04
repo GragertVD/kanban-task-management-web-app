@@ -1,6 +1,6 @@
 import { Background, Description, TaskOpenContainer, Title } from "./style";
 import iconMenu from "../../../img/icon-vertical-ellipsis.svg";
-import React, { Dispatch, SetStateAction, useRef, useState, useMemo } from "react";
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import { useContext, useEffect } from 'react';
 import { BoardsContext, TaskCardContext } from "../../../Context/Context";
 import SubtasksList from "../SubtasksList";
@@ -62,7 +62,9 @@ export const TaskOpen: React.FC<ITaskOpen> = ({ setOpenCard, setOpenEditTask }) 
         <TaskOpenContainer ref={refTaskContainer}>
           <Title>
             <h3>{dataTask.title}</h3>
-            <div style={{ position: "relative" }}>    {/*блок для  того, чтобы выпадающее меню появлялось рядом с кнопкой */}
+
+            <button
+              style={{ position: "relative", background: "none", border: "none" }}>
               <img
                 onClick={() => setshowDropMenu(!showDropMenu)}
                 src={iconMenu} alt="картинка" />
@@ -73,7 +75,7 @@ export const TaskOpen: React.FC<ITaskOpen> = ({ setOpenCard, setOpenEditTask }) 
                   :
                   <></>
               }
-            </div>
+            </button>
           </Title>
           <Description>
             {dataTask.description}
