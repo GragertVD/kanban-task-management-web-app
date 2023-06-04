@@ -27,7 +27,7 @@
   - Updating a task's status will move the task to the relevant column. If you're taking on the drag and drop bonus, dragging a task to a different column will also update the status.
 
 
-### Screenshot
+### Screenshot 
 
 ![](https://github.com/GragertVD/kanban-task-management-web-app/blob/master/screenshot.JPG)
 
@@ -38,4 +38,3 @@
 ## Author
 
 - telegram - [gragert_vd](https://t.me/gragert_vd)
-
